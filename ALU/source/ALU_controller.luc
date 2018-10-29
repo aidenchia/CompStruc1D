@@ -1,0 +1,97 @@
+module alu_controller (
+    input clk,
+    input rst,
+    input numbers[16],
+    input next,
+    output out[16],
+    output test[5],
+    output io_seg[8],
+    output io_sel[4]
+  ) {
+  
+  .clk(clk) 
+  {
+    .rst(rst) 
+    {
+      fsm state = {IDLE, ALUFN, A, B, ANSWER};
+    }
+    simple_ram ram1 (#SIZE(6), #DEPTH(1));
+    simple_ram ram2 (#SIZE(16), #DEPTH(1));
+    simple_ram ram3 (#SIZE(16), #DEPTH(1));
+  }
+  
+  alu_unit alu;
+  seven_seg seg;
+
+  always {
+  
+    seg.char = 4b0000;
+  
+    ram1.address = 0;
+    ram1.write_data = 6bx;
+    ram1.write_en = 0;
+    
+    ram2.address = 0;
+    ram2.write_data = 16bx;
+    ram2.write_en = 0;
+    
+    ram3.address = 0;
+    ram3.write_data = 16bx;
+    ram3.write_en = 0;
+    
+    alu.alufn = 16bx;
+    alu.a = 16bx;
+    alu.b = 16bx;
+    
+    test = 5b00001;
+    out = 16b0;
+    io_sel = ~4b1111;
+    io_seg = ~8b00000000;
+   
+    case (state.q) {
+    
+      state.IDLE:
+        seg.char = c{0,1,2,3};
+        io_seg = seg.out;
+
+        if (next)
+          state.d = state.ALUFN;
+  
+      state.ALUFN:
+        seg.char = c{4,2,15,8};
+        io_seg = seg.out;
+        ram1.write_data = numbers;
+        ram1.write_en = 1;
+        test = 5b00010;
+
+        if (next)
+          state.d = state.A;
+          
+      state.A:
+        ram2.write_data = numbers;
+        ram2.write_en = 1;
+        test = 5b00100;
+
+        if (next)
+          state.d = state.B;
+          
+      state.B:
+        ram3.write_data = numbers;
+        ram3.write_en = 1;
+        test = 5b01000;
+
+        if (next)
+          state.d = state.ANSWER;
+          
+      state.ANSWER:
+        alu.alufn = ram1.read_data;
+        alu.a = ram2.read_data;
+        alu.b = ram3.read_data;
+        test = 5b10000;
+        out = alu.out;
+        if (next)
+          state.d = state.IDLE;
+    }
+    
+  }
+}
