@@ -24,11 +24,21 @@ module alu_controller_4 (
   localparam ANSWER_state = 3'd4;
   
   reg [2:0] M_state_d, M_state_q = IDLE_state;
+  wire [8-1:0] M_seg_seg;
+  wire [4-1:0] M_seg_sel;
+  reg [16-1:0] M_seg_values;
+  multi_seven_seg_6 seg (
+    .clk(clk),
+    .rst(rst),
+    .values(M_seg_values),
+    .seg(M_seg_seg),
+    .sel(M_seg_sel)
+  );
   wire [6-1:0] M_ram1_read_data;
   reg [0-1:0] M_ram1_address;
   reg [6-1:0] M_ram1_write_data;
   reg [1-1:0] M_ram1_write_en;
-  simple_ram_6 #(.SIZE(3'h6), .DEPTH(1'h1)) ram1 (
+  simple_ram_7 #(.SIZE(3'h6), .DEPTH(1'h1)) ram1 (
     .clk(clk),
     .address(M_ram1_address),
     .write_data(M_ram1_write_data),
@@ -39,7 +49,7 @@ module alu_controller_4 (
   reg [0-1:0] M_ram2_address;
   reg [16-1:0] M_ram2_write_data;
   reg [1-1:0] M_ram2_write_en;
-  simple_ram_7 #(.SIZE(5'h10), .DEPTH(1'h1)) ram2 (
+  simple_ram_8 #(.SIZE(5'h10), .DEPTH(1'h1)) ram2 (
     .clk(clk),
     .address(M_ram2_address),
     .write_data(M_ram2_write_data),
@@ -50,7 +60,7 @@ module alu_controller_4 (
   reg [0-1:0] M_ram3_address;
   reg [16-1:0] M_ram3_write_data;
   reg [1-1:0] M_ram3_write_en;
-  simple_ram_7 #(.SIZE(5'h10), .DEPTH(1'h1)) ram3 (
+  simple_ram_8 #(.SIZE(5'h10), .DEPTH(1'h1)) ram3 (
     .clk(clk),
     .address(M_ram3_address),
     .write_data(M_ram3_write_data),
@@ -62,24 +72,17 @@ module alu_controller_4 (
   reg [6-1:0] M_alu_alufn;
   reg [16-1:0] M_alu_a;
   reg [16-1:0] M_alu_b;
-  alu_unit_9 alu (
+  alu_unit_10 alu (
     .alufn(M_alu_alufn),
     .a(M_alu_a),
     .b(M_alu_b),
     .out(M_alu_out)
   );
   
-  wire [8-1:0] M_seg_out;
-  reg [4-1:0] M_seg_char;
-  seven_seg_10 seg (
-    .char(M_seg_char),
-    .out(M_seg_out)
-  );
-  
   always @* begin
     M_state_d = M_state_q;
     
-    M_seg_char = 4'h0;
+    M_seg_values = 16'heeee;
     M_ram1_address = 1'h0;
     M_ram1_write_data = 6'bxxxxxx;
     M_ram1_write_en = 1'h0;
@@ -99,15 +102,17 @@ module alu_controller_4 (
     
     case (M_state_q)
       IDLE_state: begin
-        M_seg_char = 6'h1b;
-        io_seg = M_seg_out;
+        M_seg_values = 16'h0123;
+        io_seg = M_seg_seg;
+        io_sel = ~M_seg_sel;
         if (next) begin
           M_state_d = ALUFN_state;
         end
       end
       ALUFN_state: begin
-        M_seg_char = 13'h12f8;
-        io_seg = M_seg_out;
+        M_seg_values = 16'h42f8;
+        io_seg = M_seg_seg;
+        io_sel = ~M_seg_sel;
         M_ram1_write_data = numbers;
         M_ram1_write_en = 1'h1;
         test = 5'h02;
@@ -116,6 +121,9 @@ module alu_controller_4 (
         end
       end
       A_state: begin
+        M_seg_values = 16'h4eee;
+        io_seg = M_seg_seg;
+        io_sel = ~M_seg_sel;
         M_ram2_write_data = numbers;
         M_ram2_write_en = 1'h1;
         test = 5'h04;
@@ -124,6 +132,9 @@ module alu_controller_4 (
         end
       end
       B_state: begin
+        M_seg_values = 16'h7eee;
+        io_seg = M_seg_seg;
+        io_sel = ~M_seg_sel;
         M_ram3_write_data = numbers;
         M_ram3_write_en = 1'h1;
         test = 5'h08;
@@ -132,6 +143,9 @@ module alu_controller_4 (
         end
       end
       ANSWER_state: begin
+        M_seg_values = 16'h485e;
+        io_seg = M_seg_seg;
+        io_sel = ~M_seg_sel;
         M_alu_alufn = M_ram1_read_data;
         M_alu_a = M_ram2_read_data;
         M_alu_b = M_ram3_read_data;

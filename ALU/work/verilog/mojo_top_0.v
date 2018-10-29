@@ -76,6 +76,8 @@ module mojo_top_0 (
     io_led = 24'h000000;
     io_seg = 8'hff;
     io_sel = 4'hf;
+    io_seg = M_alu_io_seg;
+    io_sel = M_alu_io_sel;
     M_next_button_in = io_button[4+0-:1];
     M_next_edge_in = M_next_button_out;
     M_alu_next = M_next_edge_out;

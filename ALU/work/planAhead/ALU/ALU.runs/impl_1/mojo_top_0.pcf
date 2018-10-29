@@ -1,5 +1,5 @@
 //! **************************************************************************
-// Written by: Map P.20131013 on Mon Oct 29 17:40:05 2018
+// Written by: Map P.20131013 on Tue Oct 30 00:20:26 2018
 //! **************************************************************************
 
 SCHEMATIC START;
@@ -85,8 +85,8 @@ COMP "io_led[17]" LOCATE = SITE "P16" LEVEL 1;
 COMP "io_led[18]" LOCATE = SITE "P17" LEVEL 1;
 COMP "io_led[19]" LOCATE = SITE "P21" LEVEL 1;
 COMP "spi_mosi" LOCATE = SITE "P44" LEVEL 1;
-TIMEGRP clk = BEL "alu/M_state_q_FSM_FFd2" BEL "alu/M_state_q_FSM_FFd3" BEL
-        "alu/M_state_q_FSM_FFd1" BEL "alu/M_state_q_FSM_FFd4" BEL
+TIMEGRP clk = BEL "alu/M_state_q_FSM_FFd1" BEL "alu/M_state_q_FSM_FFd2" BEL
+        "alu/M_state_q_FSM_FFd3" BEL "alu/M_state_q_FSM_FFd4" BEL
         "alu/M_state_q_FSM_FFd5" BEL "alu/ram1/read_data_5" BEL
         "alu/ram1/read_data_4" BEL "alu/ram1/read_data_3" BEL
         "alu/ram1/read_data_2" BEL "alu/ram1/read_data_1" BEL
@@ -119,7 +119,16 @@ TIMEGRP clk = BEL "alu/M_state_q_FSM_FFd2" BEL "alu/M_state_q_FSM_FFd3" BEL
         "alu/ram3/read_data_9" BEL "alu/ram3/read_data_10" BEL
         "alu/ram3/read_data_11" BEL "alu/ram3/read_data_12" BEL
         "alu/ram3/read_data_13" BEL "alu/ram3/read_data_14" BEL
-        "alu/ram3/read_data_15" BEL "clk_BUFGP/BUFG" BEL
+        "alu/ram3/read_data_15" BEL "alu/seg/ctr/M_ctr_q_17" BEL
+        "alu/seg/ctr/M_ctr_q_16" BEL "alu/seg/ctr/M_ctr_q_15" BEL
+        "alu/seg/ctr/M_ctr_q_14" BEL "alu/seg/ctr/M_ctr_q_13" BEL
+        "alu/seg/ctr/M_ctr_q_12" BEL "alu/seg/ctr/M_ctr_q_11" BEL
+        "alu/seg/ctr/M_ctr_q_10" BEL "alu/seg/ctr/M_ctr_q_9" BEL
+        "alu/seg/ctr/M_ctr_q_8" BEL "alu/seg/ctr/M_ctr_q_7" BEL
+        "alu/seg/ctr/M_ctr_q_6" BEL "alu/seg/ctr/M_ctr_q_5" BEL
+        "alu/seg/ctr/M_ctr_q_4" BEL "alu/seg/ctr/M_ctr_q_3" BEL
+        "alu/seg/ctr/M_ctr_q_2" BEL "alu/seg/ctr/M_ctr_q_1" BEL
+        "alu/seg/ctr/M_ctr_q_0" BEL "clk_BUFGP/BUFG" BEL
         "reset_cond/M_stage_q_3" BEL "reset_cond/M_stage_q_2" BEL
         "reset_cond/M_stage_q_1" BEL "reset_cond/M_stage_q_0" BEL
         "next_edge/M_last_q" BEL "next_button/M_ctr_q_1" BEL

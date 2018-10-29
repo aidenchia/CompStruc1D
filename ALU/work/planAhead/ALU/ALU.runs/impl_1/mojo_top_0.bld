@@ -7,8 +7,9 @@ Command Line: D:\Xlinx_WebPACK\14.7\ISE_DS\ISE\bin\nt\unwrapped\ngdbuild.exe
 Executing edif2ngd -quiet "mojo_top_0.edf" "_ngo\mojo_top_0.ngo"
 Release 14.7 - edif2ngd P.20131013 (nt)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
-Reading NGO file
-"D:/yilong/ALU/work/planAhead/ALU/ALU.runs/impl_1/_ngo/mojo_top_0.ngo" ...
+Reading NGO file "C:/Users/aidenchia/Documents/mojo/Mojo
+Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.runs/impl_1/_ngo/mojo_top_0.ngo"
+...
 Gathering constraint information from source properties...
 Done.
 
@@ -30,7 +31,7 @@ NGDBUILD Design Results Summary:
   Number of errors:     0
   Number of warnings:   0
 
-Total memory usage is 157828 kilobytes
+Total memory usage is 157956 kilobytes
 
 Writing NGD file "mojo_top_0.ngd" ...
 Total REAL time to NGDBUILD completion:  4 sec

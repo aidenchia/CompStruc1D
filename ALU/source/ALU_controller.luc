@@ -14,6 +14,7 @@ module alu_controller (
     .rst(rst) 
     {
       fsm state = {IDLE, ALUFN, A, B, ANSWER};
+      multi_seven_seg seg;
     }
     simple_ram ram1 (#SIZE(6), #DEPTH(1));
     simple_ram ram2 (#SIZE(16), #DEPTH(1));
@@ -21,11 +22,10 @@ module alu_controller (
   }
   
   alu_unit alu;
-  seven_seg seg;
 
   always {
   
-    seg.char = 4b0000;
+    seg.values = {4d14, 4d14, 4d14, 4d14};
   
     ram1.address = 0;
     ram1.write_data = 6bx;
@@ -51,15 +51,17 @@ module alu_controller (
     case (state.q) {
     
       state.IDLE:
-        seg.char = c{0,1,2,3};
-        io_seg = seg.out;
+        seg.values = {4d0, 4d1, 4d2, 4d3};
+        io_seg = seg.seg;
+        io_sel = ~seg.sel;
 
         if (next)
           state.d = state.ALUFN;
   
       state.ALUFN:
-        seg.char = c{4,2,15,8};
-        io_seg = seg.out;
+        seg.values = {4d4, 4d2, 4d15, 4d8};
+        io_seg = seg.seg;
+        io_sel = ~seg.sel;
         ram1.write_data = numbers;
         ram1.write_en = 1;
         test = 5b00010;
@@ -68,6 +70,9 @@ module alu_controller (
           state.d = state.A;
           
       state.A:
+        seg.values = {4d4, 4d14, 4d14, 4d14};
+        io_seg = seg.seg;
+        io_sel = ~seg.sel;
         ram2.write_data = numbers;
         ram2.write_en = 1;
         test = 5b00100;
@@ -76,6 +81,9 @@ module alu_controller (
           state.d = state.B;
           
       state.B:
+        seg.values = {4d7, 4d14, 4d14, 4d14};
+        io_seg = seg.seg;
+        io_sel = ~seg.sel;
         ram3.write_data = numbers;
         ram3.write_en = 1;
         test = 5b01000;
@@ -84,6 +92,9 @@ module alu_controller (
           state.d = state.ANSWER;
           
       state.ANSWER:
+        seg.values = {4d4, 4d8, 4d5, 4d14};
+        io_seg = seg.seg;
+        io_sel = ~seg.sel;
         alu.alufn = ram1.read_data;
         alu.a = ram2.read_data;
         alu.b = ram3.read_data;

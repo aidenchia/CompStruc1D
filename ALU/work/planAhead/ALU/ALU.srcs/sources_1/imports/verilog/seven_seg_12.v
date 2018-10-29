@@ -4,7 +4,7 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module seven_seg_10 (
+module seven_seg_12 (
     input [3:0] char,
     output reg [7:0] out
   );
@@ -19,7 +19,7 @@ module seven_seg_10 (
         out = 8'hf9;
       end
       1'h1: begin
-        out = 8'hc0;
+        out = 8'ha1;
       end
       2'h2: begin
         out = 8'hc7;
@@ -58,7 +58,7 @@ module seven_seg_10 (
         out = 8'h8c;
       end
       4'he: begin
-        out = 8'hf8;
+        out = 8'hff;
       end
       4'hf: begin
         out = 8'h8e;

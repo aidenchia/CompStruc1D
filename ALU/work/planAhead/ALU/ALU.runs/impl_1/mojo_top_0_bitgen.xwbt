@@ -1,8 +1,8 @@
 INTSTYLE=pa
-INFILE=D:\yilong\ALU\work\planAhead\ALU\ALU.runs\impl_1\mojo_top_0_routed.ncd
-OUTFILE=D:\yilong\ALU\work\planAhead\ALU\ALU.runs\impl_1\mojo_top_0.bit
+INFILE=C:\Users\aidenchia\Documents\mojo\Mojo Notes\CompStruc1D\ALU\work\planAhead\ALU\ALU.runs\impl_1\mojo_top_0_routed.ncd
+OUTFILE=C:\Users\aidenchia\Documents\mojo\Mojo Notes\CompStruc1D\ALU\work\planAhead\ALU\ALU.runs\impl_1\mojo_top_0.bit
 FAMILY=Spartan6
 PART=xc6slx9-2tqg144
-WORKINGDIR=D:\yilong\ALU\work\planAhead\ALU\ALU.runs\impl_1
+WORKINGDIR=C:\Users\aidenchia\Documents\mojo\Mojo Notes\CompStruc1D\ALU\work\planAhead\ALU\ALU.runs\impl_1
 LICENSE=WebPack
 USER_INFO=211596358_0_0_155

@@ -1,7 +1,7 @@
 Release 14.7 par P.20131013 (nt)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-AIDEN-ALIENWARE::  Mon Oct 29 17:40:06 2018
+AIDEN-ALIENWARE::  Tue Oct 30 00:20:27 2018
 
 par -intstyle pa -w -mt on mojo_top_0.ncd mojo_top_0_routed.ncd 
 
@@ -21,16 +21,16 @@ Device speed data version:  "PRODUCTION 1.23 2013-10-13".
 Device Utilization Summary:
 
 Slice Logic Utilization:
-  Number of Slice Registers:                    91 out of  11,440    1%
-    Number used as Flip Flops:                  91
+  Number of Slice Registers:                   109 out of  11,440    1%
+    Number used as Flip Flops:                 109
     Number used as Latches:                      0
     Number used as Latch-thrus:                  0
     Number used as AND/OR logics:                0
-  Number of Slice LUTs:                        222 out of   5,720    3%
-    Number used as logic:                      219 out of   5,720    3%
-      Number using O6 output only:             182
-      Number using O5 output only:              18
-      Number using O5 and O6:                   19
+  Number of Slice LUTs:                        271 out of   5,720    4%
+    Number used as logic:                      268 out of   5,720    4%
+      Number using O6 output only:             209
+      Number using O5 output only:              34
+      Number using O5 and O6:                   25
       Number used as ROM:                        0
     Number used as Memory:                       1 out of   1,440    1%
       Number used as Dual Port RAM:              0
@@ -40,17 +40,17 @@ Slice Logic Utilization:
         Number using O5 output only:             0
         Number using O5 and O6:                  0
     Number used exclusively as route-thrus:      2
-      Number with same-slice register load:      1
-      Number with same-slice carry load:         1
+      Number with same-slice register load:      0
+      Number with same-slice carry load:         2
       Number with other load:                    0
 
 Slice Logic Distribution:
-  Number of occupied Slices:                    99 out of   1,430    6%
-  Number of MUXCYs used:                        36 out of   2,860    1%
-  Number of LUT Flip Flop pairs used:          267
-    Number with an unused Flip Flop:           177 out of     267   66%
-    Number with an unused LUT:                  45 out of     267   16%
-    Number of fully used LUT-FF pairs:          45 out of     267   16%
+  Number of occupied Slices:                   111 out of   1,430    7%
+  Number of MUXCYs used:                        56 out of   2,860    1%
+  Number of LUT Flip Flop pairs used:          329
+    Number with an unused Flip Flop:           220 out of     329   66%
+    Number with an unused LUT:                  58 out of     329   17%
+    Number of fully used LUT-FF pairs:          51 out of     329   15%
     Number of slice register sites lost
       to control set restrictions:               0 out of  11,440    0%
 
@@ -118,13 +118,13 @@ WARNING:Par:288 - The signal spi_mosi_IBUF has no load.  PAR will not attempt to
 Starting Multi-threaded Router
 
 
-Phase  1  : 1321 unrouted;      REAL time: 2 secs 
+Phase  1  : 1529 unrouted;      REAL time: 2 secs 
 
-Phase  2  : 1232 unrouted;      REAL time: 2 secs 
+Phase  2  : 1408 unrouted;      REAL time: 2 secs 
 
-Phase  3  : 656 unrouted;      REAL time: 3 secs 
+Phase  3  : 839 unrouted;      REAL time: 3 secs 
 
-Phase  4  : 656 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 4 secs 
+Phase  4  : 839 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 4 secs 
 
 Updating file: mojo_top_0_routed.ncd with current fully routed design.
 
@@ -151,7 +151,7 @@ Generating Clock Report
 +---------------------+--------------+------+------+------------+-------------+
 |        Clock Net    |   Resource   |Locked|Fanout|Net Skew(ns)|Max Delay(ns)|
 +---------------------+--------------+------+------+------------+-------------+
-|           clk_BUFGP | BUFGMUX_X2Y11| No   |   44 |  0.627     |  2.051      |
+|           clk_BUFGP | BUFGMUX_X2Y11| No   |   50 |  0.615     |  2.050      |
 +---------------------+--------------+------+------+------------+-------------+
 
 * Net Skew is the difference between the minimum and maximum routing
@@ -171,7 +171,7 @@ Asterisk (*) preceding a constraint indicates it was not met.
   Constraint                                |    Check    | Worst Case |  Best Case | Timing |   Timing   
                                             |             |    Slack   | Achievable | Errors |    Score   
 ----------------------------------------------------------------------------------------------------------
-  TS_clk = PERIOD TIMEGRP "clk" 50 MHz HIGH | SETUP       |    16.299ns|     3.701ns|       0|           0
+  TS_clk = PERIOD TIMEGRP "clk" 50 MHz HIGH | SETUP       |    16.087ns|     3.913ns|       0|           0
    50%                                      | HOLD        |     0.401ns|            |       0|           0
 ----------------------------------------------------------------------------------------------------------
 
@@ -186,7 +186,7 @@ All signals are completely routed.
 WARNING:Par:283 - There are 18 loadless signals in this design. This design will cause Bitgen to issue DRC warnings.
 
 Total REAL time to PAR completion: 4 secs 
-Total CPU time to PAR completion (all processors): 4 secs 
+Total CPU time to PAR completion (all processors): 5 secs 
 
 Peak Memory Usage:  286 MB
 
