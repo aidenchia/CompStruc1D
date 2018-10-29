@@ -35,6 +35,34 @@ module mojo_top_0 (
     .in(M_reset_cond_in),
     .out(M_reset_cond_out)
   );
+  wire [1-1:0] M_start_button_out;
+  reg [1-1:0] M_start_button_in;
+  button_conditioner_2 start_button (
+    .clk(clk),
+    .in(M_start_button_in),
+    .out(M_start_button_out)
+  );
+  wire [1-1:0] M_start_edge_out;
+  reg [1-1:0] M_start_edge_in;
+  edge_detector_3 start_edge (
+    .clk(clk),
+    .in(M_start_edge_in),
+    .out(M_start_edge_out)
+  );
+  wire [1-1:0] M_toggle_button_out;
+  reg [1-1:0] M_toggle_button_in;
+  button_conditioner_2 toggle_button (
+    .clk(clk),
+    .in(M_toggle_button_in),
+    .out(M_toggle_button_out)
+  );
+  wire [1-1:0] M_toggle_edge_out;
+  reg [1-1:0] M_toggle_edge_in;
+  edge_detector_3 toggle_edge (
+    .clk(clk),
+    .in(M_toggle_edge_in),
+    .out(M_toggle_edge_out)
+  );
   wire [1-1:0] M_next_button_out;
   reg [1-1:0] M_next_button_in;
   button_conditioner_2 next_button (
@@ -49,15 +77,35 @@ module mojo_top_0 (
     .in(M_next_edge_in),
     .out(M_next_edge_out)
   );
+  wire [1-1:0] M_auto_button_out;
+  reg [1-1:0] M_auto_button_in;
+  button_conditioner_2 auto_button (
+    .clk(clk),
+    .in(M_auto_button_in),
+    .out(M_auto_button_out)
+  );
+  wire [1-1:0] M_auto_edge_out;
+  reg [1-1:0] M_auto_edge_in;
+  edge_detector_3 auto_edge (
+    .clk(clk),
+    .in(M_auto_edge_in),
+    .out(M_auto_edge_out)
+  );
   wire [16-1:0] M_alu_out;
   wire [5-1:0] M_alu_test;
   wire [8-1:0] M_alu_io_seg;
   wire [4-1:0] M_alu_io_sel;
+  reg [1-1:0] M_alu_auto_button;
+  reg [1-1:0] M_alu_toggle;
+  reg [1-1:0] M_alu_start;
   reg [16-1:0] M_alu_numbers;
   reg [1-1:0] M_alu_next;
-  alu_controller_4 alu (
+  alu_controller_10 alu (
     .clk(clk),
     .rst(rst),
+    .auto_button(M_alu_auto_button),
+    .toggle(M_alu_toggle),
+    .start(M_alu_start),
     .numbers(M_alu_numbers),
     .next(M_alu_next),
     .out(M_alu_out),
@@ -78,9 +126,18 @@ module mojo_top_0 (
     io_sel = 4'hf;
     io_seg = M_alu_io_seg;
     io_sel = M_alu_io_sel;
+    M_start_button_in = io_button[1+0-:1];
+    M_start_edge_in = M_start_button_out;
+    M_toggle_button_in = io_button[0+0-:1];
+    M_toggle_edge_in = M_toggle_button_out;
     M_next_button_in = io_button[4+0-:1];
     M_next_edge_in = M_next_button_out;
+    M_auto_button_in = io_button[3+0-:1];
+    M_auto_edge_in = M_auto_button_out;
     M_alu_next = M_next_edge_out;
+    M_alu_auto_button = M_auto_edge_out;
+    M_alu_start = M_start_edge_out;
+    M_alu_toggle = M_toggle_edge_out;
     M_alu_numbers[0+7-:8] = io_dip[0+7-:8];
     M_alu_numbers[8+7-:8] = io_dip[8+7-:8];
     io_led[0+7-:8] = M_alu_out[0+7-:8];

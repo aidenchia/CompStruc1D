@@ -22,6 +22,7 @@ module alu_controller (
                         BOOLERROR, COMP1, COMPTESTERROR, COMPERROR,
                         SHIF1, SHIFTESTERROR, SHIFERROR};
       multi_seven_seg seg;
+      dff counter[30];
     }
     simple_ram ram1 (#SIZE(6), #DEPTH(1));
     simple_ram ram2 (#SIZE(16), #DEPTH(1));
@@ -29,6 +30,8 @@ module alu_controller (
   }
   
   alu_unit alu;
+  const X = 29;
+  var result[16];
 
   always {
   
@@ -126,7 +129,192 @@ module alu_controller (
             }
             if (start)
             {
+              case(autostate.q)
+               {
+                  autostate.INITIAL:
+                    counter.d = 0;
+                    if (auto_button)
+                    {
+                      autostate.d = autostate.ADDER1;
+                    }
+            //ADDER Test 1:, a = 3, b = 1, ALUFN[0] = 0. Output = 3-1 =2
+            autostate.ADDER1:
+                alu.alufn = 6b0;
+                alu.a = 16b11;
+                alu.b = 16b1;
+                result = alu.out;
+                //increase clock counter 
+                counter.d = counter.q+1;
+                
+                if(counter.q[X]==1 && result==16b00000010){
+                  counter.d =0;
+                  autostate.d = autostate.ADDERTESTERROR;
+                }
+                
+                else if(counter.q[X]==1 && result!=16b00000010){
+                  counter.d=0;
+                  autostate.d=autostate.ADDERERROR;
+                }
+                
+            
+             autostate.ADDERTESTERROR:
+                alu.alufn = 6b0;
+                alu.a = 16b00000011;
+                alu.b = 16b00000001;
+                result = alu.out-8b00000001;
+                counter.d = counter.q+1;
+                
+                if(counter.q[X]==1 && result==16b00000010){
+                  counter.d =0;
+                  autostate.d = autostate.BOOL1;
+                }
+                
+                else if(counter.q[X]==1 && result!=16b00000010){
+                  counter.d =0;
+                  autostate.d=autostate.ADDERERROR;
+                }
               
+              autostate.ADDERERROR:
+                counter.d = counter.q+1;
+                
+                if(counter.q[X]==1){
+                  counter.d=0;
+                  autostate.d = autostate.BOOL1;
+                }
+              
+              //BOOLEAN Test 1 (Show "A"):, a = 3, b = 1, ALUFN[3:0] = 1010. Output = 3  
+              autostate.BOOL1:
+                alu.alufn = 6b001010;
+                alu.a = 16b00000011;
+                alu.b = 16b00000001;
+                result = alu.out;
+                //increase clock counter 
+                counter.d = counter.q+1;
+                
+                if(counter.q[X]==1 && result==16b00000011){
+                  counter.d =0;
+                  autostate.d = autostate.BOOLTESTERROR;
+                }
+                
+                else if(counter.q[X]==1 && result!=16b00000011){
+                  counter.d=0;
+                  autostate.d=autostate.BOOLERROR;
+                }
+                        
+            
+             autostate.BOOLTESTERROR:
+                alu.alufn = 6b001010;
+                alu.a = 16b00000011;
+                alu.b = 16b00000001;
+                result = alu.out-16b00000001;
+                counter.d = counter.q+1;
+                
+                if(counter.q[X]==1&&result==16b00000011){
+                  counter.d =0;
+                  autostate.d = autostate.COMP1;
+                }
+                
+                else if(counter.q[X]==1&&result!=16b00000011){
+                  counter.d =0;
+                  autostate.d=autostate.BOOLERROR;
+                }
+              
+              autostate.BOOLERROR:
+                counter.d = counter.q+1;
+                
+                if(counter.q[X]==1){
+                  counter.d=0;
+                  autostate.d = autostate.COMP1;
+                }
+                
+              //COMPARE Test 1:, a = 2, b = 2, ALUFN[2:1] = 01 Output = 1 (TRUE) 
+              autostate.COMP1:
+                alu.alufn = 6b000010;
+                alu.a = 16b00000010;
+                alu.b = 16b00000010;
+                result = alu.out;
+                //increase clock counter 
+                counter.d = counter.q+1;
+                
+                if(counter.q[X]==1&&result==16b1){
+                  counter.d =0;
+                  autostate.d = autostate.COMPTESTERROR;
+                }
+                
+                else if(counter.q[X]==1&&result!=16b1){
+                  counter.d=0;
+                  autostate.d=autostate.COMPERROR;
+                }
+                
+            
+             autostate.COMPTESTERROR:
+                alu.alufn = 6b001010;
+                alu.a = 16b00000010;
+                alu.b = 16b00000010;
+                result = 16b0;
+                counter.d = counter.q+1;
+                
+                if(counter.q[X]==1&&result==16b1){
+                  counter.d =0;
+                  autostate.d = autostate.SHIF1;
+                }
+                
+                else if(counter.q[X]==1&&result!=16b1){
+                  counter.d =0;
+                  autostate.d=autostate.COMPERROR;
+                }
+              
+              autostate.COMPERROR:
+                counter.d = counter.q+1;
+                
+                if(counter.q[X]==1){
+                  counter.d=0;
+                  autostate.d = autostate.SHIF1;
+                }
+              autostate.SHIF1:
+                alu.alufn = 6b000000;
+                alu.a = 16b00000011;
+                alu.b = 16b00000010;
+                result = alu.out;
+                //increase clock counter 
+                counter.d = counter.q+1;
+                
+                if(counter.q[X]==1&&result==16b00001100){
+                  counter.d =0;
+                  autostate.d = autostate.SHIFTESTERROR;
+                }
+                
+                else if(counter.q[X]==1&&result!=16b00001100){
+                  counter.d=0;
+                  autostate.d=autostate.SHIFERROR;
+                }
+                
+            
+             autostate.SHIFTESTERROR:
+                alu.alufn = 6b001010;
+                alu.a = 16b00000011;
+                alu.b = 16b00000010;
+                result = alu.out-8b00000001;
+                counter.d = counter.q+1;
+                
+                if(counter.q[X]==1&&result==16b00001100){
+                  counter.d =0;
+                  autostate.d = autostate.INITIAL;
+                }
+                
+                else if(counter.q[X]==1&&result!=16b00001100){
+                  counter.d =0;
+                  autostate.d=autostate.SHIFERROR;
+                }
+              
+              autostate.SHIFERROR:
+                counter.d = counter.q+1;
+                
+                if(counter.q[X]==1){
+                  counter.d=0;
+                  autostate.d = autostate.INITIAL;
+                }                  
+               }
             }
     } // case ending parenthesis          
   } // always ending parenthesis  
