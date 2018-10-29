@@ -1,6 +1,9 @@
 module alu_controller (
     input clk,
     input rst,
+    input auto_button,
+    input toggle,
+    input start,
     input numbers[16],
     input next,
     output out[16],
@@ -13,7 +16,11 @@ module alu_controller (
   {
     .rst(rst) 
     {
+      fsm fsm_controller = {MANUAL, AUTO};
       fsm state = {IDLE, ALUFN, A, B, ANSWER};
+      fsm autostate = {INITIAL,ADDER1, ADDERTESTERROR, ADDERERROR, BOOL1, BOOLTESTERROR, 
+                        BOOLERROR, COMP1, COMPTESTERROR, COMPERROR,
+                        SHIF1, SHIFTESTERROR, SHIFERROR};
       multi_seven_seg seg;
     }
     simple_ram ram1 (#SIZE(6), #DEPTH(1));
@@ -47,62 +54,81 @@ module alu_controller (
     out = 16b0;
     io_sel = ~4b1111;
     io_seg = ~8b00000000;
-   
-    case (state.q) {
     
-      state.IDLE:
-        seg.values = {4d0, 4d1, 4d2, 4d3};
-        io_seg = seg.seg;
-        io_sel = ~seg.sel;
-
-        if (next)
-          state.d = state.ALUFN;
+    case (fsm_controller.q) 
+    {   
+        fsm_controller.MANUAL:
+            if (toggle) 
+              {
+                fsm_controller.d = fsm_controller.AUTO;
+              }
+            if (start) {
+              case (state.q) {
+      
+                state.IDLE:
+                  seg.values = {4d0, 4d1, 4d2, 4d3};
+                  io_seg = seg.seg;
+                  io_sel = ~seg.sel;
   
-      state.ALUFN:
-        seg.values = {4d4, 4d2, 4d15, 4d8};
-        io_seg = seg.seg;
-        io_sel = ~seg.sel;
-        ram1.write_data = numbers;
-        ram1.write_en = 1;
-        test = 5b00010;
-
-        if (next)
-          state.d = state.A;
+                  if (next)
+                    state.d = state.ALUFN;
+            
+                state.ALUFN:
+                  seg.values = {4d4, 4d2, 4d15, 4d8};
+                  io_seg = seg.seg;
+                  io_sel = ~seg.sel;
+                  ram1.write_data = numbers;
+                  ram1.write_en = 1;
+                  test = 5b00010;
           
-      state.A:
-        seg.values = {4d4, 4d14, 4d14, 4d14};
-        io_seg = seg.seg;
-        io_sel = ~seg.sel;
-        ram2.write_data = numbers;
-        ram2.write_en = 1;
-        test = 5b00100;
-
-        if (next)
-          state.d = state.B;
+                  if (next)
+                    state.d = state.A;
+                    
+                state.A:
+                  seg.values = {4d4, 4d14, 4d14, 4d14};
+                  io_seg = seg.seg;
+                  io_sel = ~seg.sel;
+                  ram2.write_data = numbers;
+                  ram2.write_en = 1;
+                  test = 5b00100;
           
-      state.B:
-        seg.values = {4d7, 4d14, 4d14, 4d14};
-        io_seg = seg.seg;
-        io_sel = ~seg.sel;
-        ram3.write_data = numbers;
-        ram3.write_en = 1;
-        test = 5b01000;
-
-        if (next)
-          state.d = state.ANSWER;
+                  if (next)
+                    state.d = state.B;
+                    
+                state.B:
+                  seg.values = {4d7, 4d14, 4d14, 4d14};
+                  io_seg = seg.seg;
+                  io_sel = ~seg.sel;
+                  ram3.write_data = numbers;
+                  ram3.write_en = 1;
+                  test = 5b01000;
           
-      state.ANSWER:
-        seg.values = {4d4, 4d8, 4d5, 4d14};
-        io_seg = seg.seg;
-        io_sel = ~seg.sel;
-        alu.alufn = ram1.read_data;
-        alu.a = ram2.read_data;
-        alu.b = ram3.read_data;
-        test = 5b10000;
-        out = alu.out;
-        if (next)
-          state.d = state.IDLE;
-    }
-    
-  }
-}
+                  if (next)
+                    state.d = state.ANSWER;
+                    
+                state.ANSWER:
+                  seg.values = {4d4, 4d8, 4d5, 4d14};
+                  io_seg = seg.seg;
+                  io_sel = ~seg.sel;
+                  alu.alufn = ram1.read_data;
+                  alu.a = ram2.read_data;
+                  alu.b = ram3.read_data;
+                  test = 5b10000;
+                  out = alu.out;
+                  if (next)
+                    state.d = state.IDLE;
+                } // manual case ending paren
+              } // if start manual ending paren
+      fsm_controller.AUTO:
+            if (toggle)
+            {
+              fsm_controller.d = fsm_controller.MANUAL;
+            }
+            if (start)
+            {
+              
+            }
+    } // case ending parenthesis          
+  } // always ending parenthesis  
+} // top module ending parenthesis
+
