@@ -92,7 +92,6 @@ module mojo_top_0 (
     .out(M_auto_edge_out)
   );
   wire [16-1:0] M_alu_out;
-  wire [5-1:0] M_alu_test;
   wire [8-1:0] M_alu_io_seg;
   wire [4-1:0] M_alu_io_sel;
   reg [1-1:0] M_alu_auto_button;
@@ -109,7 +108,6 @@ module mojo_top_0 (
     .numbers(M_alu_numbers),
     .next(M_alu_next),
     .out(M_alu_out),
-    .test(M_alu_test),
     .io_seg(M_alu_io_seg),
     .io_sel(M_alu_io_sel)
   );
@@ -142,6 +140,5 @@ module mojo_top_0 (
     M_alu_numbers[8+7-:8] = io_dip[8+7-:8];
     io_led[0+7-:8] = M_alu_out[0+7-:8];
     io_led[8+7-:8] = M_alu_out[8+7-:8];
-    io_led[16+7-:8] = M_alu_test;
   end
 endmodule

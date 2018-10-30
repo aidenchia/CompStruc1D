@@ -79,6 +79,5 @@ module mojo_top (
     alu.numbers[15:8] = io_dip[1];
     io_led[0] = alu.out[7:0];
     io_led[1] = alu.out[15:8];
-    io_led[2] = alu.test;
   }
 }

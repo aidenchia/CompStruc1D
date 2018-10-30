@@ -7,7 +7,6 @@ module alu_controller (
     input numbers[16],
     input next,
     output out[16],
-    output test[5],
     output io_seg[8],
     output io_sel[4]
   ) {
@@ -19,7 +18,7 @@ module alu_controller (
       fsm fsm_controller = {MANUAL, AUTO, REALAUTO, ALUFN, A, B, ANSWER};
       fsm autostate = {INITIAL,ADDER1, ADDERERROR, BOOL1,
                         BOOLERROR, COMP1, COMPERROR,
-                        SHIF1, SHIFERROR};
+                        SHIF1, SHIFERROR, DEMOADDERROR, DEMOBOOLERROR, DEMOCOMPERROR, DEMOSHIFERROR};
       multi_seven_seg seg;
       dff counter[30];
     }
@@ -56,7 +55,6 @@ module alu_controller (
     alu.a = 16bx;
     alu.b = 16bx;
     
-    test = 5b00001;
     out = 16b0;
     io_sel = ~4b1111;
     io_seg = ~8b00000000;
@@ -82,7 +80,6 @@ module alu_controller (
             io_sel = ~seg.sel;
             ram1.write_data = numbers;
             ram1.write_en = 1;
-            test = 5b00010;
           
             if (next)
               fsm_controller.d = fsm_controller.A;
@@ -95,7 +92,6 @@ module alu_controller (
                   io_sel = ~seg.sel;
                   ram2.write_data = numbers;
                   ram2.write_en = 1;
-                  test = 5b00100;
           
                   if (next)
                     fsm_controller.d = fsm_controller.B;
@@ -106,7 +102,6 @@ module alu_controller (
                   io_sel = ~seg.sel;
                   ram3.write_data = numbers;
                   ram3.write_en = 1;
-                  test = 5b01000;
           
                   if (next)
                     fsm_controller.d = fsm_controller.ANSWER;
@@ -118,7 +113,6 @@ module alu_controller (
                   alu.alufn = ram1.read_data;
                   alu.a = ram2.read_data;
                   alu.b = ram3.read_data;
-                  test = 5b10000;
                   out = alu.out;
                   if (next)
                     fsm_controller.d = fsm_controller.ALUFN;
@@ -194,12 +188,12 @@ module alu_controller (
               
               autostate.ADDERERROR:
                 counter.d = counter.q+1;
-                seg.values = {5d4, 5d1, 5d19, 5d3}; // display A d 3 E on the multi seg display
+                seg.values = {5d4, 5d1, 5d3, 5d14}; // display A d E on the multi seg display
                 io_seg = seg.seg;
                 io_sel = ~seg.sel;
                 if(counter.q[X]==1){
                   counter.d=0;
-                  autostate.d = autostate.BOOL1;
+                  autostate.d = autostate.DEMOBOOLERROR;
                 }
               
               //BOOLEAN Test 1 (Show "A"):, a = 3, b = 1, ALUFN = 011010. Output should be 3  
@@ -226,14 +220,14 @@ module alu_controller (
                 }                  
               
               autostate.BOOLERROR:
-                seg.values = {5d7, 5d9, 5d19, 5d3}; // display b O 3 E  on the multi seg display
+                seg.values = {5d7, 5d9, 5d3, 5d14}; // display b O E  on the multi seg display
                 io_seg = seg.seg;
                 io_sel = ~seg.sel;
                 counter.d = counter.q+1;
           
                 if(counter.q[X]==1){
                   counter.d=0;
-                  autostate.d = autostate.COMP1; // boolean has error, now let's check COMPARE
+                  autostate.d = autostate.DEMOCOMPERROR; // boolean has error, now let's check COMPARE
                 }
                 
               //COMPARE Test 1 (a == b):, a = 2, b = 2, ALUFN = 110011 Output should be 1
@@ -261,14 +255,14 @@ module alu_controller (
                 }
                 
               autostate.COMPERROR:
-                seg.values = {5d12, 5d9, 5d17, 5d3}; // display c o 1 E on multi seg display
+                seg.values = {5d12, 5d9, 5d3, 5d14}; // display c o E on multi seg display
                 io_seg = seg.seg;
                 io_sel = ~seg.sel;
                 counter.d = counter.q+1;
                 
                 if(counter.q[X]==1){
                   counter.d=0;
-                  autostate.d = autostate.SHIF1; // COMP has error, now let's check SHIFT
+                  autostate.d = autostate.DEMOSHIFERROR; // COMP has error, now let's check SHIFT
                 }
             
               //SHIFT Test 1 (SHL):, a = 3, b = 1, ALUFN = 100000, Output should be 12 
@@ -287,7 +281,7 @@ module alu_controller (
                 
                 if(counter.q[X]==1&&result.read_data==16b110){ // means its correct!
                   counter.d =0;
-                  autostate.d = autostate.INITIAL; // if they are all working, let's go through the error states for demonstration purpose
+                  autostate.d = autostate.DEMOADDERROR; // if they are all working, let's go through the error states for demonstration purpose
                 }
                 
                 else if(counter.q[X]==1&&result.read_data!=16b110){ // checking mechanism
@@ -296,7 +290,7 @@ module alu_controller (
                 }
                 
               autostate.SHIFERROR:
-                seg.values = {5d5, 5d2, 5d20, 5d3}; // display S L 6 E on multi seg display
+                seg.values = {5d5, 5d2, 5d3, 5d14}; // display S L E on multi seg display
                 io_seg = seg.seg;
                 io_sel = ~seg.sel;
                 counter.d = counter.q+1;
@@ -304,8 +298,51 @@ module alu_controller (
                 if(counter.q[X]==1){
                   counter.d=0;
                   autostate.d = autostate.INITIAL; 
-                }                  
+                }
+            
+          autostate.DEMOADDERROR:
+                seg.values = {5d4, 5d1, 5d19, 5d17}; // display A d 3 1 on multi seg display
+                io_seg = seg.seg;
+                io_sel = ~seg.sel;
+                counter.d = counter.q + 1;
+                
+                if(counter.q[X]==1){
+                  counter.d = 0;
+                  autostate.d = autostate.ADDERERROR;
+                }
+            
+          autostate.DEMOBOOLERROR:
+                seg.values = {5d7, 5d9, 5d19, 5d3}; // display b o 2 1 on multi seg display
+                io_seg = seg.seg;
+                io_sel = ~seg.sel;
+                counter.d = counter.q + 1;             
                
+                if(counter.q[X]==1){
+                  counter.d = 0;
+                  autostate.d = autostate.BOOLERROR;
+                }
+            
+          autostate.DEMOCOMPERROR:
+                seg.values = {5d12, 5d9, 5d17, 5d18}; // display c o 1 2 on multi seg display
+                io_seg = seg.seg;
+                io_sel = ~seg.sel;
+                counter.d = counter.q + 1;  
+            
+                if(counter.q[X]==1){
+                  counter.d = 0;
+                  autostate.d = autostate.COMPERROR;
+                }
+            
+          autostate.DEMOSHIFERROR:
+                seg.values = {5d5, 5d2, 5d17, 5d17}; // display S L 3 1  on multi seg display
+                io_seg = seg.seg; 
+                io_sel = ~seg.sel;
+                counter.d = counter.q + 1;
+            
+                if(counter.q[X]==1){
+                  counter.d = 0;
+                  autostate.d = autostate.SHIFERROR;
+                }     
             }
     } // case ending parenthesis          
   } // always ending parenthesis  
