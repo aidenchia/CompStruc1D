@@ -17,9 +17,9 @@ module alu_controller (
     .rst(rst) 
     {
       fsm fsm_controller = {MANUAL, AUTO, REALAUTO, ALUFN, A, B, ANSWER};
-      fsm autostate = {INITIAL,ADDER1, ADDERTESTERROR, ADDERERROR, BOOL1, BOOLTESTERROR, 
-                        BOOLERROR, COMP1, COMPTESTERROR, COMPERROR,
-                        SHIF1, SHIFTESTERROR, SHIFERROR};
+      fsm autostate = {INITIAL,ADDER1, ADDERERROR, BOOL1,
+                        BOOLERROR, COMP1, COMPERROR,
+                        SHIF1, SHIFERROR};
       multi_seven_seg seg;
       dff counter[30];
     }
@@ -127,6 +127,21 @@ module alu_controller (
 
       fsm_controller.AUTO:
       
+        /*
+           ADD   6b000000;
+           SUB   6b000001;
+           AND   6b011000;
+           OR    6b011110;
+           XOR   6b010110;
+           A     6b011010;
+           SHL   6b100000;
+           SHR   6b100001;
+           SRA   6b100011;
+           CMPEQ 6b110011;
+           CMPLT 6b110101;
+           CMPLE 6b110111;       
+        */
+      
         seg.values = {4d4, 4d6, 4d9, 4d14}; // display A U O on the multi seg display
         io_seg = seg.seg;
         io_sel = ~seg.sel;
@@ -139,10 +154,10 @@ module alu_controller (
         }
         
       fsm_controller.REALAUTO:
-      
+        // set output of this alu_controller module to be whatever is written in the ram called result
+        // the alu_unit's outputs are written into the ram
         out = result.read_data;
-        
-
+   
               case(autostate.q)
                {
                   autostate.INITIAL:
@@ -153,14 +168,9 @@ module alu_controller (
                   if (counter.q == 0)
                     autostate.d = autostate.ADDER1;
                     
-            /*
-              ADDER Test 1: 
-                 a = 2, b = 1, ALUFN[0] = 0, 
-                 Output should be 3
-            */
+            // ADDER Test 1: a = 2, b = 1, ALUFN = 000000, Output should be 3
             autostate.ADDER1:
-                // display A d d on the multi seg display
-                seg.values = {4d4, 4d1, 4d1, 4d14}; 
+                seg.values = {4d4, 4d1, 4d1, 4d14}; // display A d 2 1 on the multi seg display
                 io_seg = seg.seg;
                 io_sel = ~seg.sel;
                 
@@ -195,154 +205,108 @@ module alu_controller (
                   autostate.d = autostate.BOOL1;
                 }
               
-              //BOOLEAN Test 1 (Show "A"):, a = 3, b = 1, ALUFN[3:0] = 1010. Output = 3  
+              //BOOLEAN Test 1 (Show "A"):, a = 3, b = 1, ALUFN = 011010. Output should be 3  
               autostate.BOOL1:
-                seg.values = {4d7, 4d9, 4d9, 4d14};
+                seg.values = {4d7, 4d9, 4d9, 4d14}; // display b O O on the multi seg display
                 io_seg = seg.seg;
                 io_sel = ~seg.sel;
-                alu.alufn = 6b001010;
-                alu.a = 16b00000011;
-                alu.b = 16b00000001;
+                alu.alufn = 6b011010;
+                alu.a = 16b11;
+                alu.b = 16b1;
                 result.write_data = alu.out;
                 result.write_en = 1;
                 //increase clock counter 
                 counter.d = counter.q+1;
                 
-                if(counter.q[X]==1 && result.read_data==16b00000011){
-                  counter.d =0;
-                  autostate.d = autostate.BOOLTESTERROR;
-                }
-                
-                else if(counter.q[X]==1 && result.read_data!=16b00000011){
-                  counter.d=0;
-                  autostate.d=autostate.BOOLERROR;
-                }
-                        
-            
-             autostate.BOOLTESTERROR:
-                alu.alufn = 6b001010;
-                alu.a = 16b00000011;
-                alu.b = 16b00000001;
-                result.write_data = alu.out-16b00000001;
-                result.write_en = 1;
-                counter.d = counter.q+1;
-                
-                if(counter.q[X]==1&&result.read_data==16b00000011){
+                if(counter.q[X]==1 && result.read_data==16b11){ // means it's correct!
                   counter.d =0;
                   autostate.d = autostate.COMP1;
                 }
                 
-                else if(counter.q[X]==1&&result.read_data!=16b00000011){
-                  counter.d =0;
-                  autostate.d=autostate.BOOLERROR;
-                }
+                else if(counter.q[X]==1 && result.read_data!=16b11){ // checking mechanism
+                  counter.d=0;
+                  autostate.d=autostate.BOOLERROR; // adder has error, now let's check BOOL
+                }                  
               
               autostate.BOOLERROR:
+                seg.values = {4d7, 4d9, 4d9, 4d3}; // display b O O E on the multi seg display
+                io_seg = seg.seg;
+                io_sel = ~seg.sel;
                 counter.d = counter.q+1;
-                
+          
                 if(counter.q[X]==1){
                   counter.d=0;
-                  autostate.d = autostate.COMP1;
+                  autostate.d = autostate.COMP1; // boolean has error, now let's check COMPARE
                 }
                 
-              //COMPARE Test 1:, a = 2, b = 2, ALUFN[2:1] = 01 Output = 1 (TRUE) 
+              //COMPARE Test 1 (a == b):, a = 2, b = 2, ALUFN = 110011 Output should be 1
               autostate.COMP1:
                 seg.values = {4d12, 4d9, 4d13, 4d14}; // display c o p on multi seg display
                 io_seg = seg.seg;
                 io_sel = ~seg.sel;
             
-                alu.alufn = 6b000010;
-                alu.a = 16b00000010;
-                alu.b = 16b00000010;
+                alu.alufn = 6b110011;
+                alu.a = 16b10;
+                alu.b = 16b10;
                 result.write_data = alu.out;
                 result.write_en = 1;
                 //increase clock counter 
                 counter.d = counter.q+1;
                 
-                if(counter.q[X]==1&&result.read_data==16b1){
+                if(counter.q[X]==1&&result.read_data==16b01){ // means it's working!
                   counter.d =0;
-                  autostate.d = autostate.COMPTESTERROR;
+                  autostate.d = autostate.SHIF1; // now let's check SHIFT
                 }
                 
-                else if(counter.q[X]==1&&result.read_data!=16b1){
+                else if(counter.q[X]==1&&result.read_data!=16b10){ // checking mechanism
                   counter.d=0;
                   autostate.d=autostate.COMPERROR;
                 }
                 
-            
-             autostate.COMPTESTERROR:
-                alu.alufn = 6b001010;
-                alu.a = 16b00000010;
-                alu.b = 16b00000010;
-                result.write_data = 16b0;
-                result.write_en = 1;
-                counter.d = counter.q+1;
-                
-                if(counter.q[X]==1&&result.read_data==16b1){
-                  counter.d =0;
-                  autostate.d = autostate.SHIF1;
-                }
-                
-                else if(counter.q[X]==1&&result.read_data!=16b1){
-                  counter.d =0;
-                  autostate.d=autostate.COMPERROR;
-                }
-              
               autostate.COMPERROR:
+                seg.values = {4d12, 4d9, 4d13, 4d3}; // display c O P E on multi seg display
+                io_seg = seg.seg;
+                io_sel = ~seg.sel;
                 counter.d = counter.q+1;
                 
                 if(counter.q[X]==1){
                   counter.d=0;
-                  autostate.d = autostate.SHIF1;
+                  autostate.d = autostate.SHIF1; // COMP has error, now let's check SHIFT
                 }
+            
+              //SHIFT Test 1 (SHR):, a = 3, b = 2, ALUFN = 100001, Output should be 12 
               autostate.SHIF1:
-                seg.values = {4d5, 4d14, 4d14, 4d14}; // display S on multi seg display
+                seg.values = {4d5, 4d11, 4d10, 4d14}; // display S H R on multi seg display
                 io_seg = seg.seg;
                 io_sel = ~seg.sel;
             
-                alu.alufn = 6b000000;
-                alu.a = 16b00000011;
-                alu.b = 16b00000010;
+                alu.alufn = 6b100001;
+                alu.a = 16b11;
+                alu.b = 16b10;
                 result.write_data = alu.out;
                 result.write_en = 1;
                 //increase clock counter 
                 counter.d = counter.q+1;
                 
-                if(counter.q[X]==1&&result.read_data==16b00001100){
+                if(counter.q[X]==1&&result.read_data==16b1100){ // means its correct!
                   counter.d =0;
-                  autostate.d = autostate.SHIFTESTERROR;
+                  autostate.d = autostate.ADDERERROR; // if they are all working, let's go through the error states for demonstration purpose
                 }
                 
-                else if(counter.q[X]==1&&result.read_data!=16b00001100){
+                else if(counter.q[X]==1&&result.read_data!=16b1100){ // checking mechanism
                   counter.d=0;
                   autostate.d=autostate.SHIFERROR;
                 }
                 
-            
-             autostate.SHIFTESTERROR:
-                alu.alufn = 6b001010;
-                alu.a = 16b00000011;
-                alu.b = 16b00000010;
-                result.write_data = alu.out-8b00000001;
-                result.write_en = 1;
-                counter.d = counter.q+1;
-                
-                if(counter.q[X]==1&&result.read_data==16b00001100){
-                  counter.d =0;
-                  autostate.d = autostate.INITIAL;
-                }
-                
-                else if(counter.q[X]==1&&result.read_data!=16b00001100){
-                  counter.d =0;
-                  autostate.d=autostate.SHIFERROR;
-                }
-              
               autostate.SHIFERROR:
+                seg.values = {4d5, 4d11, 4d10, 4d3}; // display S H R E on multi seg display
+                io_seg = seg.seg;
+                io_sel = ~seg.sel;
                 counter.d = counter.q+1;
                 
                 if(counter.q[X]==1){
                   counter.d=0;
-                  autostate.d = autostate.INITIAL;
+                  autostate.d = autostate.INITIAL; 
                 }                  
                
             }

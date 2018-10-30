@@ -31,17 +31,13 @@ module alu_controller_10 (
   reg [2:0] M_fsm_controller_d, M_fsm_controller_q = MANUAL_fsm_controller;
   localparam INITIAL_autostate = 4'd0;
   localparam ADDER1_autostate = 4'd1;
-  localparam ADDERTESTERROR_autostate = 4'd2;
-  localparam ADDERERROR_autostate = 4'd3;
-  localparam BOOL1_autostate = 4'd4;
-  localparam BOOLTESTERROR_autostate = 4'd5;
-  localparam BOOLERROR_autostate = 4'd6;
-  localparam COMP1_autostate = 4'd7;
-  localparam COMPTESTERROR_autostate = 4'd8;
-  localparam COMPERROR_autostate = 4'd9;
-  localparam SHIF1_autostate = 4'd10;
-  localparam SHIFTESTERROR_autostate = 4'd11;
-  localparam SHIFERROR_autostate = 4'd12;
+  localparam ADDERERROR_autostate = 4'd2;
+  localparam BOOL1_autostate = 4'd3;
+  localparam BOOLERROR_autostate = 4'd4;
+  localparam COMP1_autostate = 4'd5;
+  localparam COMPERROR_autostate = 4'd6;
+  localparam SHIF1_autostate = 4'd7;
+  localparam SHIFERROR_autostate = 4'd8;
   
   reg [3:0] M_autostate_d, M_autostate_q = INITIAL_autostate;
   wire [8-1:0] M_seg_seg;
@@ -204,7 +200,7 @@ module alu_controller_10 (
         end
       end
       AUTO_fsm_controller: begin
-        M_seg_values = 16'h46b9;
+        M_seg_values = 16'h469e;
         io_seg = M_seg_seg;
         io_sel = ~M_seg_sel;
         if (toggle) begin
@@ -241,27 +237,7 @@ module alu_controller_10 (
               M_counter_d = 1'h0;
               M_autostate_d = BOOL1_autostate;
             end else begin
-              if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data != 16'h0002) begin
-                M_counter_d = 1'h0;
-                M_autostate_d = ADDERERROR_autostate;
-              end
-            end
-          end
-          ADDERTESTERROR_autostate: begin
-            M_seg_values = 16'h411e;
-            io_seg = M_seg_seg;
-            io_sel = ~M_seg_sel;
-            M_alu_alufn = 6'h00;
-            M_alu_a = 16'h0003;
-            M_alu_b = 16'h0001;
-            M_result_write_data = M_alu_out - 16'h0001;
-            M_result_write_en = 1'h1;
-            M_counter_d = M_counter_q + 1'h1;
-            if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data == 16'h0002) begin
-              M_counter_d = 1'h0;
-              M_autostate_d = BOOL1_autostate;
-            end else begin
-              if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data != 16'h0002) begin
+              if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data != 16'h0003) begin
                 M_counter_d = 1'h0;
                 M_autostate_d = ADDERERROR_autostate;
               end
@@ -281,27 +257,10 @@ module alu_controller_10 (
             M_seg_values = 16'h799e;
             io_seg = M_seg_seg;
             io_sel = ~M_seg_sel;
-            M_alu_alufn = 6'h0a;
+            M_alu_alufn = 6'h1a;
             M_alu_a = 16'h0003;
             M_alu_b = 16'h0001;
             M_result_write_data = M_alu_out;
-            M_result_write_en = 1'h1;
-            M_counter_d = M_counter_q + 1'h1;
-            if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data == 16'h0003) begin
-              M_counter_d = 1'h0;
-              M_autostate_d = BOOLTESTERROR_autostate;
-            end else begin
-              if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data != 16'h0003) begin
-                M_counter_d = 1'h0;
-                M_autostate_d = BOOLERROR_autostate;
-              end
-            end
-          end
-          BOOLTESTERROR_autostate: begin
-            M_alu_alufn = 6'h0a;
-            M_alu_a = 16'h0003;
-            M_alu_b = 16'h0001;
-            M_result_write_data = M_alu_out - 16'h0001;
             M_result_write_en = 1'h1;
             M_counter_d = M_counter_q + 1'h1;
             if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data == 16'h0003) begin
@@ -315,6 +274,9 @@ module alu_controller_10 (
             end
           end
           BOOLERROR_autostate: begin
+            M_seg_values = 16'h7993;
+            io_seg = M_seg_seg;
+            io_sel = ~M_seg_sel;
             M_counter_d = M_counter_q + 1'h1;
             if (M_counter_q[29+0-:1] == 1'h1) begin
               M_counter_d = 1'h0;
@@ -325,7 +287,7 @@ module alu_controller_10 (
             M_seg_values = 16'hc9de;
             io_seg = M_seg_seg;
             io_sel = ~M_seg_sel;
-            M_alu_alufn = 6'h02;
+            M_alu_alufn = 6'h33;
             M_alu_a = 16'h0002;
             M_alu_b = 16'h0002;
             M_result_write_data = M_alu_out;
@@ -333,32 +295,18 @@ module alu_controller_10 (
             M_counter_d = M_counter_q + 1'h1;
             if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data == 16'h0001) begin
               M_counter_d = 1'h0;
-              M_autostate_d = COMPTESTERROR_autostate;
-            end else begin
-              if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data != 16'h0001) begin
-                M_counter_d = 1'h0;
-                M_autostate_d = COMPERROR_autostate;
-              end
-            end
-          end
-          COMPTESTERROR_autostate: begin
-            M_alu_alufn = 6'h0a;
-            M_alu_a = 16'h0002;
-            M_alu_b = 16'h0002;
-            M_result_write_data = 16'h0000;
-            M_result_write_en = 1'h1;
-            M_counter_d = M_counter_q + 1'h1;
-            if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data == 16'h0001) begin
-              M_counter_d = 1'h0;
               M_autostate_d = SHIF1_autostate;
             end else begin
-              if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data != 16'h0001) begin
+              if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data != 16'h0002) begin
                 M_counter_d = 1'h0;
                 M_autostate_d = COMPERROR_autostate;
               end
             end
           end
           COMPERROR_autostate: begin
+            M_seg_values = 16'hc9d3;
+            io_seg = M_seg_seg;
+            io_sel = ~M_seg_sel;
             M_counter_d = M_counter_q + 1'h1;
             if (M_counter_q[29+0-:1] == 1'h1) begin
               M_counter_d = 1'h0;
@@ -366,10 +314,10 @@ module alu_controller_10 (
             end
           end
           SHIF1_autostate: begin
-            M_seg_values = 16'h5eee;
+            M_seg_values = 16'h5bae;
             io_seg = M_seg_seg;
             io_sel = ~M_seg_sel;
-            M_alu_alufn = 6'h00;
+            M_alu_alufn = 6'h21;
             M_alu_a = 16'h0003;
             M_alu_b = 16'h0002;
             M_result_write_data = M_alu_out;
@@ -377,24 +325,7 @@ module alu_controller_10 (
             M_counter_d = M_counter_q + 1'h1;
             if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data == 16'h000c) begin
               M_counter_d = 1'h0;
-              M_autostate_d = SHIFTESTERROR_autostate;
-            end else begin
-              if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data != 16'h000c) begin
-                M_counter_d = 1'h0;
-                M_autostate_d = SHIFERROR_autostate;
-              end
-            end
-          end
-          SHIFTESTERROR_autostate: begin
-            M_alu_alufn = 6'h0a;
-            M_alu_a = 16'h0003;
-            M_alu_b = 16'h0002;
-            M_result_write_data = M_alu_out - 8'h01;
-            M_result_write_en = 1'h1;
-            M_counter_d = M_counter_q + 1'h1;
-            if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data == 16'h000c) begin
-              M_counter_d = 1'h0;
-              M_autostate_d = INITIAL_autostate;
+              M_autostate_d = ADDERERROR_autostate;
             end else begin
               if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data != 16'h000c) begin
                 M_counter_d = 1'h0;
@@ -403,6 +334,9 @@ module alu_controller_10 (
             end
           end
           SHIFERROR_autostate: begin
+            M_seg_values = 16'h5ba3;
+            io_seg = M_seg_seg;
+            io_sel = ~M_seg_sel;
             M_counter_d = M_counter_q + 1'h1;
             if (M_counter_q[29+0-:1] == 1'h1) begin
               M_counter_d = 1'h0;

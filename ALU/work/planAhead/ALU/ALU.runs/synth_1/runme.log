@@ -79,8 +79,8 @@ Elaborating module <shifter_unit_25>.
 Elaborating module <adder_unit_26>.
 
 Elaborating module <boolean_unit_27>.
-WARNING:HDLCompiler:413 - "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/ALU_controller_10.v" Line 134: Result of 16-bit expression is truncated to fit in 6-bit target.
-WARNING:HDLCompiler:413 - "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/ALU_controller_10.v" Line 158: Result of 16-bit expression is truncated to fit in 6-bit target.
+WARNING:HDLCompiler:413 - "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/ALU_controller_10.v" Line 130: Result of 16-bit expression is truncated to fit in 6-bit target.
+WARNING:HDLCompiler:413 - "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/ALU_controller_10.v" Line 154: Result of 16-bit expression is truncated to fit in 6-bit target.
 
 =========================================================================
 *                           HDL Synthesis                               *
@@ -158,10 +158,10 @@ WARNING:Xst:647 - Input <auto_button> is never used. This port will be preserved
     -----------------------------------------------------------------------
     Found finite state machine <FSM_1> for signal <M_autostate_q>.
     -----------------------------------------------------------------------
-    | States             | 12                                             |
-    | Transitions        | 68                                             |
+    | States             | 9                                              |
+    | Transitions        | 50                                             |
     | Inputs             | 9                                              |
-    | Outputs            | 27                                             |
+    | Outputs            | 29                                             |
     | Clock              | clk (rising_edge)                              |
     | Reset              | rst (positive)                                 |
     | Reset type         | synchronous                                    |
@@ -170,12 +170,11 @@ WARNING:Xst:647 - Input <auto_button> is never used. This port will be preserved
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 16-bit subtractor for signal <M_alu_out[15]_GND_6_o_sub_103_OUT> created at line 392.
-    Found 30-bit adder for signal <M_counter_q[29]_GND_6_o_add_112_OUT> created at line 406.
+    Found 30-bit adder for signal <M_counter_q[29]_GND_6_o_add_75_OUT> created at line 340.
     Summary:
-	inferred   2 Adder/Subtractor(s).
+	inferred   1 Adder/Subtractor(s).
 	inferred  30 D-type flip-flop(s).
-	inferred  43 Multiplexer(s).
+	inferred  36 Multiplexer(s).
 	inferred   2 Finite State Machine(s).
 Unit <alu_controller_10> synthesized.
 
@@ -288,9 +287,8 @@ HDL Synthesis Report
 Macro Statistics
 # RAMs                                                 : 1
  16x8-bit single-port Read Only RAM                    : 1
-# Adders/Subtractors                                   : 9
+# Adders/Subtractors                                   : 8
  16-bit addsub                                         : 1
- 16-bit subtractor                                     : 1
  18-bit adder                                          : 1
  20-bit adder                                          : 4
  30-bit adder                                          : 1
@@ -307,13 +305,13 @@ Macro Statistics
 # Comparators                                          : 4
  2-bit comparator greater                              : 1
  2-bit comparator lessequal                            : 3
-# Multiplexers                                         : 49
+# Multiplexers                                         : 42
  1-bit 2-to-1 multiplexer                              : 1
  16-bit 16-to-1 multiplexer                            : 1
- 16-bit 2-to-1 multiplexer                             : 10
+ 16-bit 2-to-1 multiplexer                             : 8
  16-bit 4-to-1 multiplexer                             : 3
  18-bit 2-to-1 multiplexer                             : 1
- 30-bit 2-to-1 multiplexer                             : 20
+ 30-bit 2-to-1 multiplexer                             : 15
  4-bit 2-to-1 multiplexer                              : 6
  6-bit 2-to-1 multiplexer                              : 1
  8-bit 2-to-1 multiplexer                              : 6
@@ -363,9 +361,8 @@ Advanced HDL Synthesis Report
 Macro Statistics
 # RAMs                                                 : 1
  16x8-bit single-port distributed Read Only RAM        : 1
-# Adders/Subtractors                                   : 4
+# Adders/Subtractors                                   : 3
  16-bit addsub                                         : 1
- 16-bit subtractor                                     : 1
  30-bit adder                                          : 1
  4-bit adder                                           : 1
 # Counters                                             : 5
@@ -376,12 +373,12 @@ Macro Statistics
 # Comparators                                          : 4
  2-bit comparator greater                              : 1
  2-bit comparator lessequal                            : 3
-# Multiplexers                                         : 48
+# Multiplexers                                         : 41
  1-bit 2-to-1 multiplexer                              : 1
  16-bit 16-to-1 multiplexer                            : 1
- 16-bit 2-to-1 multiplexer                             : 10
+ 16-bit 2-to-1 multiplexer                             : 8
  16-bit 4-to-1 multiplexer                             : 3
- 30-bit 2-to-1 multiplexer                             : 20
+ 30-bit 2-to-1 multiplexer                             : 15
  4-bit 2-to-1 multiplexer                              : 6
  6-bit 2-to-1 multiplexer                              : 1
  8-bit 2-to-1 multiplexer                              : 6
@@ -413,23 +410,20 @@ Optimizing FSM <alu/FSM_0> on signal <M_fsm_controller_q[1:3]> with user encodin
  110   | 110
 -------------------
 Analyzing FSM <MFsm> for best encoding.
-Optimizing FSM <alu/FSM_1> on signal <M_autostate_q[1:12]> with one-hot encoding.
------------------------
+Optimizing FSM <alu/FSM_1> on signal <M_autostate_q[1:4]> with user encoding.
+-------------------
  State | Encoding
------------------------
- 0000  | 000000000001
- 0001  | 000000000010
- 0011  | 000000000100
- 0100  | 000000001000
- 0110  | 000000010000
- 0101  | 000000100000
- 0111  | 000001000000
- 1001  | 000010000000
- 1000  | 000100000000
- 1010  | 001000000000
- 1100  | 010000000000
- 1011  | 100000000000
------------------------
+-------------------
+ 0000  | 0000
+ 0001  | 0001
+ 0010  | 0010
+ 0011  | 0011
+ 0100  | 0100
+ 0101  | 0101
+ 0110  | 0110
+ 0111  | 0111
+ 1000  | 1000
+-------------------
 
 Optimizing unit <simple_ram_16> ...
 
@@ -465,7 +459,8 @@ WARNING:Xst:2677 - Node <auto_button/M_ctr_q_16> of sequential type is unconnect
 WARNING:Xst:2677 - Node <auto_button/M_ctr_q_17> of sequential type is unconnected in block <mojo_top_0>.
 WARNING:Xst:2677 - Node <auto_button/M_ctr_q_18> of sequential type is unconnected in block <mojo_top_0>.
 WARNING:Xst:2677 - Node <auto_button/M_ctr_q_19> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:1710 - FF/Latch <alu/result/ram_0_3> (without init value) has a constant value of 0 in block <mojo_top_0>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <alu/result/ram_0_2> (without init value) has a constant value of 0 in block <mojo_top_0>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <alu/result/ram_0_3> (without init value) has a constant value of 0 in block <mojo_top_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <alu/result/ram_0_4> (without init value) has a constant value of 0 in block <mojo_top_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <alu/result/ram_0_5> (without init value) has a constant value of 0 in block <mojo_top_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <alu/result/ram_0_6> (without init value) has a constant value of 0 in block <mojo_top_0>. This FF/Latch will be trimmed during the optimization process.
@@ -478,7 +473,7 @@ WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <alu/result/ram_0_12
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <alu/result/ram_0_13> (without init value) has a constant value of 0 in block <mojo_top_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <alu/result/ram_0_14> (without init value) has a constant value of 0 in block <mojo_top_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <alu/result/ram_0_15> (without init value) has a constant value of 0 in block <mojo_top_0>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <alu/M_autostate_q_FSM_FFd1> has a constant value of 0 in block <mojo_top_0>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <alu/result/read_data_2> (without init value) has a constant value of 0 in block <mojo_top_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <alu/result/read_data_3> (without init value) has a constant value of 0 in block <mojo_top_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <alu/result/read_data_4> (without init value) has a constant value of 0 in block <mojo_top_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <alu/result/read_data_5> (without init value) has a constant value of 0 in block <mojo_top_0>. This FF/Latch will be trimmed during the optimization process.
@@ -496,9 +491,10 @@ WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <alu/result/read_dat
 Mapping all equations...
 Building and optimizing final netlist ...
 Found area constraint ratio of 100 (+ 0) on block mojo_top_0, actual ratio is 10.
-FlipFlop alu/M_autostate_q_FSM_FFd11 has been replicated 1 time(s)
-FlipFlop alu/M_autostate_q_FSM_FFd9 has been replicated 1 time(s)
-FlipFlop alu/M_fsm_controller_q_FSM_FFd1 has been replicated 5 time(s)
+FlipFlop alu/M_autostate_q_FSM_FFd2 has been replicated 1 time(s)
+FlipFlop alu/M_autostate_q_FSM_FFd4 has been replicated 3 time(s)
+FlipFlop alu/M_fsm_controller_q_FSM_FFd1 has been replicated 6 time(s)
+FlipFlop alu/ram1/read_data_0 has been replicated 1 time(s)
 
 Final Macro Processing ...
 
@@ -513,8 +509,8 @@ Unit <mojo_top_0> processed.
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 218
- Flip-Flops                                            : 218
+# Registers                                            : 213
+ Flip-Flops                                            : 213
 # Shift Registers                                      : 3
  2-bit shift register                                  : 3
 
@@ -540,7 +536,7 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-clk                                | BUFGP                  | 224   |
+clk                                | BUFGP                  | 219   |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -551,9 +547,9 @@ Timing Summary:
 ---------------
 Speed Grade: -2
 
-   Minimum period: 9.563ns (Maximum Frequency: 104.570MHz)
+   Minimum period: 7.881ns (Maximum Frequency: 126.887MHz)
    Minimum input arrival time before clock: 3.526ns
-   Maximum output required time after clock: 13.278ns
+   Maximum output required time after clock: 12.380ns
    Maximum combinational path delay: No path found
 
 =========================================================================

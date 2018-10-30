@@ -25,5 +25,6 @@ module multi_seven_seg #(
  
     digit_dec.in = ctr.value;             // decode active digit to one-hot
     sel = digit_dec.out;                  // output the active digit
+    
   }
 }
