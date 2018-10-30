@@ -5,7 +5,7 @@
 */
 
 module seven_seg_22 (
-    input [3:0] char,
+    input [4:0] char,
     output reg [7:0] out
   );
   
@@ -43,7 +43,7 @@ module seven_seg_22 (
         out = 8'hc8;
       end
       4'h9: begin
-        out = 8'hc0;
+        out = 8'ha3;
       end
       4'ha: begin
         out = 8'h88;
@@ -52,7 +52,7 @@ module seven_seg_22 (
         out = 8'h89;
       end
       4'hc: begin
-        out = 8'hc6;
+        out = 8'ha7;
       end
       4'hd: begin
         out = 8'h8c;
@@ -62,6 +62,21 @@ module seven_seg_22 (
       end
       4'hf: begin
         out = 8'h8e;
+      end
+      5'h10: begin
+        out = 8'hc0;
+      end
+      5'h11: begin
+        out = 8'hf9;
+      end
+      5'h12: begin
+        out = 8'ha4;
+      end
+      5'h13: begin
+        out = 8'hb0;
+      end
+      5'h14: begin
+        out = 8'h82;
       end
     endcase
   end
