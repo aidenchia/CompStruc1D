@@ -20,17 +20,15 @@ module alu_controller_10 (
   
   
   
-  localparam MANUAL_fsm_controller = 1'd0;
-  localparam AUTO_fsm_controller = 1'd1;
+  localparam MANUAL_fsm_controller = 3'd0;
+  localparam AUTO_fsm_controller = 3'd1;
+  localparam REALAUTO_fsm_controller = 3'd2;
+  localparam ALUFN_fsm_controller = 3'd3;
+  localparam A_fsm_controller = 3'd4;
+  localparam B_fsm_controller = 3'd5;
+  localparam ANSWER_fsm_controller = 3'd6;
   
-  reg M_fsm_controller_d, M_fsm_controller_q = MANUAL_fsm_controller;
-  localparam IDLE_state = 3'd0;
-  localparam ALUFN_state = 3'd1;
-  localparam A_state = 3'd2;
-  localparam B_state = 3'd3;
-  localparam ANSWER_state = 3'd4;
-  
-  reg [2:0] M_state_d, M_state_q = IDLE_state;
+  reg [2:0] M_fsm_controller_d, M_fsm_controller_q = MANUAL_fsm_controller;
   localparam INITIAL_autostate = 4'd0;
   localparam ADDER1_autostate = 4'd1;
   localparam ADDERTESTERROR_autostate = 4'd2;
@@ -90,12 +88,23 @@ module alu_controller_10 (
     .write_en(M_ram3_write_en),
     .read_data(M_ram3_read_data)
   );
+  wire [16-1:0] M_result_read_data;
+  reg [0-1:0] M_result_address;
+  reg [16-1:0] M_result_write_data;
+  reg [1-1:0] M_result_write_en;
+  simple_ram_17 #(.SIZE(5'h10), .DEPTH(1'h1)) result (
+    .clk(clk),
+    .address(M_result_address),
+    .write_data(M_result_write_data),
+    .write_en(M_result_write_en),
+    .read_data(M_result_read_data)
+  );
   
   wire [16-1:0] M_alu_out;
   reg [6-1:0] M_alu_alufn;
   reg [16-1:0] M_alu_a;
   reg [16-1:0] M_alu_b;
-  alu_unit_19 alu (
+  alu_unit_20 alu (
     .alufn(M_alu_alufn),
     .a(M_alu_a),
     .b(M_alu_b),
@@ -104,10 +113,7 @@ module alu_controller_10 (
   
   localparam X = 5'h1d;
   
-  integer [15:0] result;
-  
   always @* begin
-    M_state_d = M_state_q;
     M_fsm_controller_d = M_fsm_controller_q;
     M_autostate_d = M_autostate_q;
     M_counter_d = M_counter_q;
@@ -122,6 +128,9 @@ module alu_controller_10 (
     M_ram3_address = 1'h0;
     M_ram3_write_data = 16'bxxxxxxxxxxxxxxxx;
     M_ram3_write_en = 1'h0;
+    M_result_address = 1'h0;
+    M_result_write_data = 16'bxxxxxxxxxxxxxxxx;
+    M_result_write_en = 1'h0;
     M_alu_alufn = 16'bxxxxxxxxxxxxxxxx;
     M_alu_a = 16'bxxxxxxxxxxxxxxxx;
     M_alu_b = 16'bxxxxxxxxxxxxxxxx;
@@ -132,240 +141,254 @@ module alu_controller_10 (
     
     case (M_fsm_controller_q)
       MANUAL_fsm_controller: begin
+        M_seg_values = 16'h0123;
+        io_seg = M_seg_seg;
+        io_sel = ~M_seg_sel;
         if (toggle) begin
           M_fsm_controller_d = AUTO_fsm_controller;
         end
         if (start) begin
-          
-          case (M_state_q)
-            IDLE_state: begin
-              M_seg_values = 16'h0123;
-              io_seg = M_seg_seg;
-              io_sel = ~M_seg_sel;
-              if (next) begin
-                M_state_d = ALUFN_state;
-              end
-            end
-            ALUFN_state: begin
-              M_seg_values = 16'h42f8;
-              io_seg = M_seg_seg;
-              io_sel = ~M_seg_sel;
-              M_ram1_write_data = numbers;
-              M_ram1_write_en = 1'h1;
-              test = 5'h02;
-              if (next) begin
-                M_state_d = A_state;
-              end
-            end
-            A_state: begin
-              M_seg_values = 16'h4eee;
-              io_seg = M_seg_seg;
-              io_sel = ~M_seg_sel;
-              M_ram2_write_data = numbers;
-              M_ram2_write_en = 1'h1;
-              test = 5'h04;
-              if (next) begin
-                M_state_d = B_state;
-              end
-            end
-            B_state: begin
-              M_seg_values = 16'h7eee;
-              io_seg = M_seg_seg;
-              io_sel = ~M_seg_sel;
-              M_ram3_write_data = numbers;
-              M_ram3_write_en = 1'h1;
-              test = 5'h08;
-              if (next) begin
-                M_state_d = ANSWER_state;
-              end
-            end
-            ANSWER_state: begin
-              M_seg_values = 16'h485e;
-              io_seg = M_seg_seg;
-              io_sel = ~M_seg_sel;
-              M_alu_alufn = M_ram1_read_data;
-              M_alu_a = M_ram2_read_data;
-              M_alu_b = M_ram3_read_data;
-              test = 5'h10;
-              out = M_alu_out;
-              if (next) begin
-                M_state_d = IDLE_state;
-              end
-            end
-          endcase
+          M_fsm_controller_d = ALUFN_fsm_controller;
+        end
+      end
+      ALUFN_fsm_controller: begin
+        M_seg_values = 16'h42f8;
+        io_seg = M_seg_seg;
+        io_sel = ~M_seg_sel;
+        M_ram1_write_data = numbers;
+        M_ram1_write_en = 1'h1;
+        test = 5'h02;
+        if (next) begin
+          M_fsm_controller_d = A_fsm_controller;
+        end
+        if (toggle) begin
+          M_fsm_controller_d = MANUAL_fsm_controller;
+        end
+      end
+      A_fsm_controller: begin
+        M_seg_values = 16'h4eee;
+        io_seg = M_seg_seg;
+        io_sel = ~M_seg_sel;
+        M_ram2_write_data = numbers;
+        M_ram2_write_en = 1'h1;
+        test = 5'h04;
+        if (next) begin
+          M_fsm_controller_d = B_fsm_controller;
+        end
+      end
+      B_fsm_controller: begin
+        M_seg_values = 16'h7eee;
+        io_seg = M_seg_seg;
+        io_sel = ~M_seg_sel;
+        M_ram3_write_data = numbers;
+        M_ram3_write_en = 1'h1;
+        test = 5'h08;
+        if (next) begin
+          M_fsm_controller_d = ANSWER_fsm_controller;
+        end
+      end
+      ANSWER_fsm_controller: begin
+        M_seg_values = 16'h485e;
+        io_seg = M_seg_seg;
+        io_sel = ~M_seg_sel;
+        M_alu_alufn = M_ram1_read_data;
+        M_alu_a = M_ram2_read_data;
+        M_alu_b = M_ram3_read_data;
+        test = 5'h10;
+        out = M_alu_out;
+        if (next) begin
+          M_fsm_controller_d = ALUFN_fsm_controller;
+        end
+        if (toggle) begin
+          M_fsm_controller_d = MANUAL_fsm_controller;
         end
       end
       AUTO_fsm_controller: begin
+        M_seg_values = 16'h46f9;
+        io_seg = M_seg_seg;
+        io_sel = ~M_seg_sel;
         if (toggle) begin
           M_fsm_controller_d = MANUAL_fsm_controller;
         end
         if (start) begin
-          
-          case (M_autostate_q)
-            INITIAL_autostate: begin
-              M_counter_d = 1'h0;
-              if (auto_button) begin
-                M_autostate_d = ADDER1_autostate;
-              end
-            end
-            ADDER1_autostate: begin
-              M_alu_alufn = 6'h00;
-              M_alu_a = 16'h0003;
-              M_alu_b = 16'h0001;
-              result = M_alu_out;
-              M_counter_d = M_counter_q + 1'h1;
-              if (M_counter_q[29+0-:1] == 1'h1 && result == 16'h0002) begin
-                M_counter_d = 1'h0;
-                M_autostate_d = ADDERTESTERROR_autostate;
-              end else begin
-                if (M_counter_q[29+0-:1] == 1'h1 && result != 16'h0002) begin
-                  M_counter_d = 1'h0;
-                  M_autostate_d = ADDERERROR_autostate;
-                end
-              end
-            end
-            ADDERTESTERROR_autostate: begin
-              M_alu_alufn = 6'h00;
-              M_alu_a = 16'h0003;
-              M_alu_b = 16'h0001;
-              result = M_alu_out - 8'h01;
-              M_counter_d = M_counter_q + 1'h1;
-              if (M_counter_q[29+0-:1] == 1'h1 && result == 16'h0002) begin
-                M_counter_d = 1'h0;
-                M_autostate_d = BOOL1_autostate;
-              end else begin
-                if (M_counter_q[29+0-:1] == 1'h1 && result != 16'h0002) begin
-                  M_counter_d = 1'h0;
-                  M_autostate_d = ADDERERROR_autostate;
-                end
-              end
-            end
-            ADDERERROR_autostate: begin
-              M_counter_d = M_counter_q + 1'h1;
-              if (M_counter_q[29+0-:1] == 1'h1) begin
-                M_counter_d = 1'h0;
-                M_autostate_d = BOOL1_autostate;
-              end
-            end
-            BOOL1_autostate: begin
-              M_alu_alufn = 6'h0a;
-              M_alu_a = 16'h0003;
-              M_alu_b = 16'h0001;
-              result = M_alu_out;
-              M_counter_d = M_counter_q + 1'h1;
-              if (M_counter_q[29+0-:1] == 1'h1 && result == 16'h0003) begin
-                M_counter_d = 1'h0;
-                M_autostate_d = BOOLTESTERROR_autostate;
-              end else begin
-                if (M_counter_q[29+0-:1] == 1'h1 && result != 16'h0003) begin
-                  M_counter_d = 1'h0;
-                  M_autostate_d = BOOLERROR_autostate;
-                end
-              end
-            end
-            BOOLTESTERROR_autostate: begin
-              M_alu_alufn = 6'h0a;
-              M_alu_a = 16'h0003;
-              M_alu_b = 16'h0001;
-              result = M_alu_out - 16'h0001;
-              M_counter_d = M_counter_q + 1'h1;
-              if (M_counter_q[29+0-:1] == 1'h1 && result == 16'h0003) begin
-                M_counter_d = 1'h0;
-                M_autostate_d = COMP1_autostate;
-              end else begin
-                if (M_counter_q[29+0-:1] == 1'h1 && result != 16'h0003) begin
-                  M_counter_d = 1'h0;
-                  M_autostate_d = BOOLERROR_autostate;
-                end
-              end
-            end
-            BOOLERROR_autostate: begin
-              M_counter_d = M_counter_q + 1'h1;
-              if (M_counter_q[29+0-:1] == 1'h1) begin
-                M_counter_d = 1'h0;
-                M_autostate_d = COMP1_autostate;
-              end
-            end
-            COMP1_autostate: begin
-              M_alu_alufn = 6'h02;
-              M_alu_a = 16'h0002;
-              M_alu_b = 16'h0002;
-              result = M_alu_out;
-              M_counter_d = M_counter_q + 1'h1;
-              if (M_counter_q[29+0-:1] == 1'h1 && result == 16'h0001) begin
-                M_counter_d = 1'h0;
-                M_autostate_d = COMPTESTERROR_autostate;
-              end else begin
-                if (M_counter_q[29+0-:1] == 1'h1 && result != 16'h0001) begin
-                  M_counter_d = 1'h0;
-                  M_autostate_d = COMPERROR_autostate;
-                end
-              end
-            end
-            COMPTESTERROR_autostate: begin
-              M_alu_alufn = 6'h0a;
-              M_alu_a = 16'h0002;
-              M_alu_b = 16'h0002;
-              result = 16'h0000;
-              M_counter_d = M_counter_q + 1'h1;
-              if (M_counter_q[29+0-:1] == 1'h1 && result == 16'h0001) begin
-                M_counter_d = 1'h0;
-                M_autostate_d = SHIF1_autostate;
-              end else begin
-                if (M_counter_q[29+0-:1] == 1'h1 && result != 16'h0001) begin
-                  M_counter_d = 1'h0;
-                  M_autostate_d = COMPERROR_autostate;
-                end
-              end
-            end
-            COMPERROR_autostate: begin
-              M_counter_d = M_counter_q + 1'h1;
-              if (M_counter_q[29+0-:1] == 1'h1) begin
-                M_counter_d = 1'h0;
-                M_autostate_d = SHIF1_autostate;
-              end
-            end
-            SHIF1_autostate: begin
-              M_alu_alufn = 6'h00;
-              M_alu_a = 16'h0003;
-              M_alu_b = 16'h0002;
-              result = M_alu_out;
-              M_counter_d = M_counter_q + 1'h1;
-              if (M_counter_q[29+0-:1] == 1'h1 && result == 16'h000c) begin
-                M_counter_d = 1'h0;
-                M_autostate_d = SHIFTESTERROR_autostate;
-              end else begin
-                if (M_counter_q[29+0-:1] == 1'h1 && result != 16'h000c) begin
-                  M_counter_d = 1'h0;
-                  M_autostate_d = SHIFERROR_autostate;
-                end
-              end
-            end
-            SHIFTESTERROR_autostate: begin
-              M_alu_alufn = 6'h0a;
-              M_alu_a = 16'h0003;
-              M_alu_b = 16'h0002;
-              result = M_alu_out - 8'h01;
-              M_counter_d = M_counter_q + 1'h1;
-              if (M_counter_q[29+0-:1] == 1'h1 && result == 16'h000c) begin
-                M_counter_d = 1'h0;
-                M_autostate_d = INITIAL_autostate;
-              end else begin
-                if (M_counter_q[29+0-:1] == 1'h1 && result != 16'h000c) begin
-                  M_counter_d = 1'h0;
-                  M_autostate_d = SHIFERROR_autostate;
-                end
-              end
-            end
-            SHIFERROR_autostate: begin
-              M_counter_d = M_counter_q + 1'h1;
-              if (M_counter_q[29+0-:1] == 1'h1) begin
-                M_counter_d = 1'h0;
-                M_autostate_d = INITIAL_autostate;
-              end
-            end
-          endcase
+          M_fsm_controller_d = REALAUTO_fsm_controller;
         end
+      end
+      REALAUTO_fsm_controller: begin
+        out = M_result_read_data;
+        
+        case (M_autostate_q)
+          INITIAL_autostate: begin
+            M_counter_d = 1'h0;
+            if (M_counter_q == 1'h0) begin
+              M_autostate_d = ADDER1_autostate;
+            end
+          end
+          ADDER1_autostate: begin
+            M_alu_alufn = 6'h00;
+            M_alu_a = 16'h0003;
+            M_alu_b = 16'h0001;
+            M_result_write_data = M_alu_out;
+            M_result_write_en = 1'h1;
+            M_counter_d = M_counter_q + 1'h1;
+            if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data == 16'h0002) begin
+              M_counter_d = 1'h0;
+              M_autostate_d = ADDERTESTERROR_autostate;
+            end else begin
+              if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data != 16'h0002) begin
+                M_counter_d = 1'h0;
+                M_autostate_d = ADDERERROR_autostate;
+              end
+            end
+          end
+          ADDERTESTERROR_autostate: begin
+            M_alu_alufn = 6'h00;
+            M_alu_a = 16'h0003;
+            M_alu_b = 16'h0001;
+            M_result_write_data = M_alu_out - 8'h01;
+            M_result_write_en = 1'h1;
+            M_counter_d = M_counter_q + 1'h1;
+            if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data == 16'h0002) begin
+              M_counter_d = 1'h0;
+              M_autostate_d = BOOL1_autostate;
+            end else begin
+              if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data != 16'h0002) begin
+                M_counter_d = 1'h0;
+                M_autostate_d = ADDERERROR_autostate;
+              end
+            end
+          end
+          ADDERERROR_autostate: begin
+            M_counter_d = M_counter_q + 1'h1;
+            if (M_counter_q[29+0-:1] == 1'h1) begin
+              M_counter_d = 1'h0;
+              M_autostate_d = BOOL1_autostate;
+            end
+          end
+          BOOL1_autostate: begin
+            M_alu_alufn = 6'h0a;
+            M_alu_a = 16'h0003;
+            M_alu_b = 16'h0001;
+            M_result_write_data = M_alu_out;
+            M_result_write_en = 1'h1;
+            M_counter_d = M_counter_q + 1'h1;
+            if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data == 16'h0003) begin
+              M_counter_d = 1'h0;
+              M_autostate_d = BOOLTESTERROR_autostate;
+            end else begin
+              if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data != 16'h0003) begin
+                M_counter_d = 1'h0;
+                M_autostate_d = BOOLERROR_autostate;
+              end
+            end
+          end
+          BOOLTESTERROR_autostate: begin
+            M_alu_alufn = 6'h0a;
+            M_alu_a = 16'h0003;
+            M_alu_b = 16'h0001;
+            M_result_write_data = M_alu_out - 16'h0001;
+            M_result_write_en = 1'h1;
+            M_counter_d = M_counter_q + 1'h1;
+            if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data == 16'h0003) begin
+              M_counter_d = 1'h0;
+              M_autostate_d = COMP1_autostate;
+            end else begin
+              if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data != 16'h0003) begin
+                M_counter_d = 1'h0;
+                M_autostate_d = BOOLERROR_autostate;
+              end
+            end
+          end
+          BOOLERROR_autostate: begin
+            M_counter_d = M_counter_q + 1'h1;
+            if (M_counter_q[29+0-:1] == 1'h1) begin
+              M_counter_d = 1'h0;
+              M_autostate_d = COMP1_autostate;
+            end
+          end
+          COMP1_autostate: begin
+            M_alu_alufn = 6'h02;
+            M_alu_a = 16'h0002;
+            M_alu_b = 16'h0002;
+            M_result_write_data = M_alu_out;
+            M_result_write_en = 1'h1;
+            M_counter_d = M_counter_q + 1'h1;
+            if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data == 16'h0001) begin
+              M_counter_d = 1'h0;
+              M_autostate_d = COMPTESTERROR_autostate;
+            end else begin
+              if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data != 16'h0001) begin
+                M_counter_d = 1'h0;
+                M_autostate_d = COMPERROR_autostate;
+              end
+            end
+          end
+          COMPTESTERROR_autostate: begin
+            M_alu_alufn = 6'h0a;
+            M_alu_a = 16'h0002;
+            M_alu_b = 16'h0002;
+            M_result_write_data = 16'h0000;
+            M_result_write_en = 1'h1;
+            M_counter_d = M_counter_q + 1'h1;
+            if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data == 16'h0001) begin
+              M_counter_d = 1'h0;
+              M_autostate_d = SHIF1_autostate;
+            end else begin
+              if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data != 16'h0001) begin
+                M_counter_d = 1'h0;
+                M_autostate_d = COMPERROR_autostate;
+              end
+            end
+          end
+          COMPERROR_autostate: begin
+            M_counter_d = M_counter_q + 1'h1;
+            if (M_counter_q[29+0-:1] == 1'h1) begin
+              M_counter_d = 1'h0;
+              M_autostate_d = SHIF1_autostate;
+            end
+          end
+          SHIF1_autostate: begin
+            M_alu_alufn = 6'h00;
+            M_alu_a = 16'h0003;
+            M_alu_b = 16'h0002;
+            M_result_write_data = M_alu_out;
+            M_result_write_en = 1'h1;
+            M_counter_d = M_counter_q + 1'h1;
+            if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data == 16'h000c) begin
+              M_counter_d = 1'h0;
+              M_autostate_d = SHIFTESTERROR_autostate;
+            end else begin
+              if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data != 16'h000c) begin
+                M_counter_d = 1'h0;
+                M_autostate_d = SHIFERROR_autostate;
+              end
+            end
+          end
+          SHIFTESTERROR_autostate: begin
+            M_alu_alufn = 6'h0a;
+            M_alu_a = 16'h0003;
+            M_alu_b = 16'h0002;
+            M_result_write_data = M_alu_out - 8'h01;
+            M_result_write_en = 1'h1;
+            M_counter_d = M_counter_q + 1'h1;
+            if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data == 16'h000c) begin
+              M_counter_d = 1'h0;
+              M_autostate_d = INITIAL_autostate;
+            end else begin
+              if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data != 16'h000c) begin
+                M_counter_d = 1'h0;
+                M_autostate_d = SHIFERROR_autostate;
+              end
+            end
+          end
+          SHIFERROR_autostate: begin
+            M_counter_d = M_counter_q + 1'h1;
+            if (M_counter_q[29+0-:1] == 1'h1) begin
+              M_counter_d = 1'h0;
+              M_autostate_d = INITIAL_autostate;
+            end
+          end
+        endcase
       end
     endcase
   end
@@ -374,12 +397,10 @@ module alu_controller_10 (
     if (rst == 1'b1) begin
       M_counter_q <= 1'h0;
       M_fsm_controller_q <= 1'h0;
-      M_state_q <= 1'h0;
       M_autostate_q <= 1'h0;
     end else begin
       M_counter_q <= M_counter_d;
       M_fsm_controller_q <= M_fsm_controller_d;
-      M_state_q <= M_state_d;
       M_autostate_q <= M_autostate_d;
     end
   end

@@ -16,8 +16,7 @@ module alu_controller (
   {
     .rst(rst) 
     {
-      fsm fsm_controller = {MANUAL, AUTO};
-      fsm state = {IDLE, ALUFN, A, B, ANSWER};
+      fsm fsm_controller = {MANUAL, AUTO, REALAUTO, ALUFN, A, B, ANSWER};
       fsm autostate = {INITIAL,ADDER1, ADDERTESTERROR, ADDERERROR, BOOL1, BOOLTESTERROR, 
                         BOOLERROR, COMP1, COMPTESTERROR, COMPERROR,
                         SHIF1, SHIFTESTERROR, SHIFERROR};
@@ -27,11 +26,11 @@ module alu_controller (
     simple_ram ram1 (#SIZE(6), #DEPTH(1));
     simple_ram ram2 (#SIZE(16), #DEPTH(1));
     simple_ram ram3 (#SIZE(16), #DEPTH(1));
+    simple_ram result (#SIZE(16), #DEPTH(1));
   }
   
   alu_unit alu;
   const X = 29;
-  var result[16];
 
   always {
   
@@ -49,6 +48,10 @@ module alu_controller (
     ram3.write_data = 16bx;
     ram3.write_en = 0;
     
+    result.address = 0;
+    result.write_data = 16bx;
+    result.write_en = 0;
+    
     alu.alufn = 16bx;
     alu.a = 16bx;
     alu.b = 16bx;
@@ -61,33 +64,38 @@ module alu_controller (
     case (fsm_controller.q) 
     {   
         fsm_controller.MANUAL:
+            seg.values = {4d0, 4d1, 4d2, 4d3};
+            io_seg = seg.seg;
+            io_sel = ~seg.sel;
             if (toggle) 
               {
                 fsm_controller.d = fsm_controller.AUTO;
               }
             if (start) {
-              case (state.q) {
+                fsm_controller.d = fsm_controller.ALUFN;
+              }
       
-                state.IDLE:
-                  seg.values = {4d0, 4d1, 4d2, 4d3};
-                  io_seg = seg.seg;
-                  io_sel = ~seg.sel;
-  
-                  if (next)
-                    state.d = state.ALUFN;
+         //fsm_controller.IDLE:
+           //seg.values = {4d0, 4d1, 4d2, 4d3};
+           //io_seg = seg.seg;
+           //io_sel = ~seg.sel;
+           //if (next)
+             //fsm_controller.d = fsm_controller.ALUFN;
             
-                state.ALUFN:
-                  seg.values = {4d4, 4d2, 4d15, 4d8};
-                  io_seg = seg.seg;
-                  io_sel = ~seg.sel;
-                  ram1.write_data = numbers;
-                  ram1.write_en = 1;
-                  test = 5b00010;
+          fsm_controller.ALUFN:
+            seg.values = {4d4, 4d2, 4d15, 4d8};
+            io_seg = seg.seg;
+            io_sel = ~seg.sel;
+            ram1.write_data = numbers;
+            ram1.write_en = 1;
+            test = 5b00010;
           
-                  if (next)
-                    state.d = state.A;
+            if (next)
+              fsm_controller.d = fsm_controller.A;
+          if (toggle)
+                      fsm_controller.d = fsm_controller.MANUAL;
                     
-                state.A:
+                fsm_controller.A:
                   seg.values = {4d4, 4d14, 4d14, 4d14};
                   io_seg = seg.seg;
                   io_sel = ~seg.sel;
@@ -96,9 +104,9 @@ module alu_controller (
                   test = 5b00100;
           
                   if (next)
-                    state.d = state.B;
+                    fsm_controller.d = fsm_controller.B;
                     
-                state.B:
+                fsm_controller.B:
                   seg.values = {4d7, 4d14, 4d14, 4d14};
                   io_seg = seg.seg;
                   io_sel = ~seg.sel;
@@ -107,9 +115,9 @@ module alu_controller (
                   test = 5b01000;
           
                   if (next)
-                    state.d = state.ANSWER;
+                    fsm_controller.d = fsm_controller.ANSWER;
                     
-                state.ANSWER:
+                fsm_controller.ANSWER:
                   seg.values = {4d4, 4d8, 4d5, 4d14};
                   io_seg = seg.seg;
                   io_sel = ~seg.sel;
@@ -119,39 +127,50 @@ module alu_controller (
                   test = 5b10000;
                   out = alu.out;
                   if (next)
-                    state.d = state.IDLE;
-                } // manual case ending paren
-              } // if start manual ending paren
+                    fsm_controller.d = fsm_controller.ALUFN;
+                  if (toggle)
+                      fsm_controller.d = fsm_controller.MANUAL;
+
       fsm_controller.AUTO:
+      
+        seg.values = {4d4, 4d6, 4d15, 4d9};
+        io_seg = seg.seg;
+        io_sel = ~seg.sel;
             if (toggle)
             {
               fsm_controller.d = fsm_controller.MANUAL;
             }
             if (start)
-            {
+            {  fsm_controller.d = fsm_controller.REALAUTO;
+        }
+        
+      fsm_controller.REALAUTO:
+      
+        out = result.read_data;
+
               case(autostate.q)
                {
                   autostate.INITIAL:
                     counter.d = 0;
-                    if (auto_button)
-                    {
-                      autostate.d = autostate.ADDER1;
-                    }
+                  if (counter.q == 0)
+                    autostate.d = autostate.ADDER1;
+                    
             //ADDER Test 1:, a = 3, b = 1, ALUFN[0] = 0. Output = 3-1 =2
             autostate.ADDER1:
                 alu.alufn = 6b0;
                 alu.a = 16b11;
                 alu.b = 16b1;
-                result = alu.out;
+                result.write_data = alu.out;
+                result.write_en = 1;
                 //increase clock counter 
                 counter.d = counter.q+1;
                 
-                if(counter.q[X]==1 && result==16b00000010){
+                if(counter.q[X]==1 && result.read_data==16b00000010){
                   counter.d =0;
                   autostate.d = autostate.ADDERTESTERROR;
                 }
                 
-                else if(counter.q[X]==1 && result!=16b00000010){
+                else if(counter.q[X]==1 && result.read_data!=16b00000010){
                   counter.d=0;
                   autostate.d=autostate.ADDERERROR;
                 }
@@ -161,15 +180,17 @@ module alu_controller (
                 alu.alufn = 6b0;
                 alu.a = 16b00000011;
                 alu.b = 16b00000001;
-                result = alu.out-8b00000001;
+                result.write_data = alu.out-8b00000001;
+                result.write_en = 1;
+                
                 counter.d = counter.q+1;
                 
-                if(counter.q[X]==1 && result==16b00000010){
+                if(counter.q[X]==1 && result.read_data==16b00000010){
                   counter.d =0;
                   autostate.d = autostate.BOOL1;
                 }
                 
-                else if(counter.q[X]==1 && result!=16b00000010){
+                else if(counter.q[X]==1 && result.read_data!=16b00000010){
                   counter.d =0;
                   autostate.d=autostate.ADDERERROR;
                 }
@@ -187,16 +208,17 @@ module alu_controller (
                 alu.alufn = 6b001010;
                 alu.a = 16b00000011;
                 alu.b = 16b00000001;
-                result = alu.out;
+                result.write_data = alu.out;
+                result.write_en = 1;
                 //increase clock counter 
                 counter.d = counter.q+1;
                 
-                if(counter.q[X]==1 && result==16b00000011){
+                if(counter.q[X]==1 && result.read_data==16b00000011){
                   counter.d =0;
                   autostate.d = autostate.BOOLTESTERROR;
                 }
                 
-                else if(counter.q[X]==1 && result!=16b00000011){
+                else if(counter.q[X]==1 && result.read_data!=16b00000011){
                   counter.d=0;
                   autostate.d=autostate.BOOLERROR;
                 }
@@ -206,15 +228,16 @@ module alu_controller (
                 alu.alufn = 6b001010;
                 alu.a = 16b00000011;
                 alu.b = 16b00000001;
-                result = alu.out-16b00000001;
+                result.write_data = alu.out-16b00000001;
+                result.write_en = 1;
                 counter.d = counter.q+1;
                 
-                if(counter.q[X]==1&&result==16b00000011){
+                if(counter.q[X]==1&&result.read_data==16b00000011){
                   counter.d =0;
                   autostate.d = autostate.COMP1;
                 }
                 
-                else if(counter.q[X]==1&&result!=16b00000011){
+                else if(counter.q[X]==1&&result.read_data!=16b00000011){
                   counter.d =0;
                   autostate.d=autostate.BOOLERROR;
                 }
@@ -232,16 +255,17 @@ module alu_controller (
                 alu.alufn = 6b000010;
                 alu.a = 16b00000010;
                 alu.b = 16b00000010;
-                result = alu.out;
+                result.write_data = alu.out;
+                result.write_en = 1;
                 //increase clock counter 
                 counter.d = counter.q+1;
                 
-                if(counter.q[X]==1&&result==16b1){
+                if(counter.q[X]==1&&result.read_data==16b1){
                   counter.d =0;
                   autostate.d = autostate.COMPTESTERROR;
                 }
                 
-                else if(counter.q[X]==1&&result!=16b1){
+                else if(counter.q[X]==1&&result.read_data!=16b1){
                   counter.d=0;
                   autostate.d=autostate.COMPERROR;
                 }
@@ -251,15 +275,16 @@ module alu_controller (
                 alu.alufn = 6b001010;
                 alu.a = 16b00000010;
                 alu.b = 16b00000010;
-                result = 16b0;
+                result.write_data = 16b0;
+                result.write_en = 1;
                 counter.d = counter.q+1;
                 
-                if(counter.q[X]==1&&result==16b1){
+                if(counter.q[X]==1&&result.read_data==16b1){
                   counter.d =0;
                   autostate.d = autostate.SHIF1;
                 }
                 
-                else if(counter.q[X]==1&&result!=16b1){
+                else if(counter.q[X]==1&&result.read_data!=16b1){
                   counter.d =0;
                   autostate.d=autostate.COMPERROR;
                 }
@@ -275,16 +300,17 @@ module alu_controller (
                 alu.alufn = 6b000000;
                 alu.a = 16b00000011;
                 alu.b = 16b00000010;
-                result = alu.out;
+                result.write_data = alu.out;
+                result.write_en = 1;
                 //increase clock counter 
                 counter.d = counter.q+1;
                 
-                if(counter.q[X]==1&&result==16b00001100){
+                if(counter.q[X]==1&&result.read_data==16b00001100){
                   counter.d =0;
                   autostate.d = autostate.SHIFTESTERROR;
                 }
                 
-                else if(counter.q[X]==1&&result!=16b00001100){
+                else if(counter.q[X]==1&&result.read_data!=16b00001100){
                   counter.d=0;
                   autostate.d=autostate.SHIFERROR;
                 }
@@ -294,15 +320,16 @@ module alu_controller (
                 alu.alufn = 6b001010;
                 alu.a = 16b00000011;
                 alu.b = 16b00000010;
-                result = alu.out-8b00000001;
+                result.write_data = alu.out-8b00000001;
+                result.write_en = 1;
                 counter.d = counter.q+1;
                 
-                if(counter.q[X]==1&&result==16b00001100){
+                if(counter.q[X]==1&&result.read_data==16b00001100){
                   counter.d =0;
                   autostate.d = autostate.INITIAL;
                 }
                 
-                else if(counter.q[X]==1&&result!=16b00001100){
+                else if(counter.q[X]==1&&result.read_data!=16b00001100){
                   counter.d =0;
                   autostate.d=autostate.SHIFERROR;
                 }
@@ -314,7 +341,7 @@ module alu_controller (
                   counter.d=0;
                   autostate.d = autostate.INITIAL;
                 }                  
-               }
+               
             }
     } // case ending parenthesis          
   } // always ending parenthesis  
