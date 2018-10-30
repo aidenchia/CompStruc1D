@@ -133,7 +133,9 @@ module alu_controller (
            SRA   6b100011;
            CMPEQ 6b110011;
            CMPLT 6b110101;
-           CMPLE 6b110111;       
+           CMPLE 6b110111;
+           
+           For the auto test, we are only testing ADD, A, SHL, and COMPEQ       
         */
       
         seg.values = {5d4, 5d6, 5d14, 5d14}; // display A U on the multi seg display
@@ -312,7 +314,7 @@ module alu_controller (
                 }
             
           autostate.DEMOBOOLERROR:
-                seg.values = {5d7, 5d9, 5d19, 5d3}; // display b o 2 1 on multi seg display
+                seg.values = {5d7, 5d9, 5d19, 5d17}; // display b o 2 1 on multi seg display
                 io_seg = seg.seg;
                 io_sel = ~seg.sel;
                 counter.d = counter.q + 1;             

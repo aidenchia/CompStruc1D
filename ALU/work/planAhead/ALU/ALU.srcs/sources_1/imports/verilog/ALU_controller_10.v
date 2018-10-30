@@ -349,7 +349,7 @@ module alu_controller_10 (
             end
           end
           DEMOBOOLERROR_autostate: begin
-            M_seg_values = 20'h3a663;
+            M_seg_values = 20'h3a671;
             io_seg = M_seg_seg;
             io_sel = ~M_seg_sel;
             M_counter_d = M_counter_q + 1'h1;
