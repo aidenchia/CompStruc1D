@@ -8,9 +8,9 @@ var WshShell = new ActiveXObject( "WScript.Shell" );
 var ProcEnv = WshShell.Environment( "Process" );
 var PathVal = ProcEnv("PATH");
 if ( PathVal.length == 0 ) {
-  PathVal = "C:/Xilinx/14.7/ISE_DS/EDK/bin/nt;C:/Xilinx/14.7/ISE_DS/EDK/lib/nt;C:/Xilinx/14.7/ISE_DS/ISE/bin/nt;C:/Xilinx/14.7/ISE_DS/ISE/lib/nt;C:/Xilinx/14.7/ISE_DS/common/bin/nt;C:/Xilinx/14.7/ISE_DS/common/lib/nt;C:/Xilinx/14.7/ISE_DS/PlanAhead/bin;";
+  PathVal = "D:/Xlinx_WebPACK/14.7/ISE_DS/EDK/bin/nt;D:/Xlinx_WebPACK/14.7/ISE_DS/EDK/lib/nt;D:/Xlinx_WebPACK/14.7/ISE_DS/ISE/bin/nt;D:/Xlinx_WebPACK/14.7/ISE_DS/ISE/lib/nt;D:/Xlinx_WebPACK/14.7/ISE_DS/common/bin/nt;D:/Xlinx_WebPACK/14.7/ISE_DS/common/lib/nt;D:/Xlinx_WebPACK/14.7/ISE_DS/PlanAhead/bin;";
 } else {
-  PathVal = "C:/Xilinx/14.7/ISE_DS/EDK/bin/nt;C:/Xilinx/14.7/ISE_DS/EDK/lib/nt;C:/Xilinx/14.7/ISE_DS/ISE/bin/nt;C:/Xilinx/14.7/ISE_DS/ISE/lib/nt;C:/Xilinx/14.7/ISE_DS/common/bin/nt;C:/Xilinx/14.7/ISE_DS/common/lib/nt;C:/Xilinx/14.7/ISE_DS/PlanAhead/bin;" + PathVal;
+  PathVal = "D:/Xlinx_WebPACK/14.7/ISE_DS/EDK/bin/nt;D:/Xlinx_WebPACK/14.7/ISE_DS/EDK/lib/nt;D:/Xlinx_WebPACK/14.7/ISE_DS/ISE/bin/nt;D:/Xlinx_WebPACK/14.7/ISE_DS/ISE/lib/nt;D:/Xlinx_WebPACK/14.7/ISE_DS/common/bin/nt;D:/Xlinx_WebPACK/14.7/ISE_DS/common/lib/nt;D:/Xlinx_WebPACK/14.7/ISE_DS/PlanAhead/bin;" + PathVal;
 }
 
 ProcEnv("PATH") = PathVal;

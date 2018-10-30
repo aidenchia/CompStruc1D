@@ -37,7 +37,7 @@ module seven_seg_22 (
         out = 8'hc1;
       end
       3'h7: begin
-        out = 8'h80;
+        out = 8'h83;
       end
       4'h8: begin
         out = 8'hc8;
@@ -49,7 +49,7 @@ module seven_seg_22 (
         out = 8'h88;
       end
       4'hb: begin
-        out = 8'h89;
+        out = 8'h8f;
       end
       4'hc: begin
         out = 8'hc6;

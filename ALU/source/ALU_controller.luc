@@ -64,26 +64,20 @@ module alu_controller (
     case (fsm_controller.q) 
     {   
         fsm_controller.MANUAL:
-            seg.values = {4d0, 4d1, 4d2, 4d3};
+            seg.values = {4d0, 4d1, 4d2, 4d3}; // display I d l e on the multi seg display
             io_seg = seg.seg;
             io_sel = ~seg.sel;
-            if (toggle) 
+            if (toggle)  // if top button is pressed, we start the auto testing
               {
                 fsm_controller.d = fsm_controller.AUTO;
               }
-            if (start) {
+            if (start)  // if centre button is pressed, we start the manual testing 
+              { 
                 fsm_controller.d = fsm_controller.ALUFN;
               }
-      
-         //fsm_controller.IDLE:
-           //seg.values = {4d0, 4d1, 4d2, 4d3};
-           //io_seg = seg.seg;
-           //io_sel = ~seg.sel;
-           //if (next)
-             //fsm_controller.d = fsm_controller.ALUFN;
             
           fsm_controller.ALUFN:
-            seg.values = {4d4, 4d2, 4d15, 4d8};
+            seg.values = {4d4, 4d2, 4d15, 4d8};  // display A L F N on the multi seg display
             io_seg = seg.seg;
             io_sel = ~seg.sel;
             ram1.write_data = numbers;
@@ -92,11 +86,11 @@ module alu_controller (
           
             if (next)
               fsm_controller.d = fsm_controller.A;
-          if (toggle)
+            if (toggle)
                       fsm_controller.d = fsm_controller.MANUAL;
                     
                 fsm_controller.A:
-                  seg.values = {4d4, 4d14, 4d14, 4d14};
+                  seg.values = {4d4, 4d14, 4d14, 4d14}; // display A on the multi seg display
                   io_seg = seg.seg;
                   io_sel = ~seg.sel;
                   ram2.write_data = numbers;
@@ -107,7 +101,7 @@ module alu_controller (
                     fsm_controller.d = fsm_controller.B;
                     
                 fsm_controller.B:
-                  seg.values = {4d7, 4d14, 4d14, 4d14};
+                  seg.values = {4d7, 4d14, 4d14, 4d14}; // display B on the multi seg display
                   io_seg = seg.seg;
                   io_sel = ~seg.sel;
                   ram3.write_data = numbers;
@@ -133,71 +127,69 @@ module alu_controller (
 
       fsm_controller.AUTO:
       
-        seg.values = {4d4, 4d6, 4d15, 4d9};
+        seg.values = {4d4, 4d6, 4d9, 4d14}; // display A U O on the multi seg display
         io_seg = seg.seg;
         io_sel = ~seg.sel;
             if (toggle)
             {
               fsm_controller.d = fsm_controller.MANUAL;
             }
-            if (start)
+            if (start) // if centre button pressed, we start the auto testing
             {  fsm_controller.d = fsm_controller.REALAUTO;
         }
         
       fsm_controller.REALAUTO:
       
         out = result.read_data;
+        
 
               case(autostate.q)
                {
                   autostate.INITIAL:
+                  seg.values = {4d0, 4d8, 4d0, 4d11};
+                  io_seg = seg.seg;
+                  io_sel = ~seg.sel;
                     counter.d = 0;
                   if (counter.q == 0)
                     autostate.d = autostate.ADDER1;
                     
-            //ADDER Test 1:, a = 3, b = 1, ALUFN[0] = 0. Output = 3-1 =2
+            /*
+              ADDER Test 1: 
+                 a = 2, b = 1, ALUFN[0] = 0, 
+                 Output should be 3
+            */
             autostate.ADDER1:
-                alu.alufn = 6b0;
-                alu.a = 16b11;
-                alu.b = 16b1;
+                // display A d d on the multi seg display
+                seg.values = {4d4, 4d1, 4d1, 4d14}; 
+                io_seg = seg.seg;
+                io_sel = ~seg.sel;
+                
+                // Pass alufn = 000000 into alu_unit, so that it will run the add operation
+                alu.alufn = 6b000000; 
+                
+                // set the values of a and b and write the result to the ram
+                alu.a = 16b10;
+                alu.b = 16b1;  
                 result.write_data = alu.out;
-                result.write_en = 1;
-                //increase clock counter 
-                counter.d = counter.q+1;
-                
-                if(counter.q[X]==1 && result.read_data==16b00000010){
-                  counter.d =0;
-                  autostate.d = autostate.ADDERTESTERROR;
-                }
-                
-                else if(counter.q[X]==1 && result.read_data!=16b00000010){
-                  counter.d=0;
-                  autostate.d=autostate.ADDERERROR;
-                }
-                
+                result.write_en = 1; 
             
-             autostate.ADDERTESTERROR:
-                alu.alufn = 6b0;
-                alu.a = 16b00000011;
-                alu.b = 16b00000001;
-                result.write_data = alu.out-8b00000001;
-                result.write_en = 1;
+                counter.d = counter.q+1; //increase clock counter 
                 
-                counter.d = counter.q+1;
-                
-                if(counter.q[X]==1 && result.read_data==16b00000010){
+                if(counter.q[X]==1 && result.read_data==16b11){  // means it's correct!
                   counter.d =0;
                   autostate.d = autostate.BOOL1;
                 }
                 
-                else if(counter.q[X]==1 && result.read_data!=16b00000010){
-                  counter.d =0;
+                else if(counter.q[X]==1 && result.read_data!=16b11){ // checking mechanism
+                  counter.d=0;
                   autostate.d=autostate.ADDERERROR;
-                }
+                } 
               
               autostate.ADDERERROR:
                 counter.d = counter.q+1;
-                
+                seg.values = {4d4, 4d1, 4d1, 4d3}; // display A d d E on the multi seg display
+                io_seg = seg.seg;
+                io_sel = ~seg.sel;
                 if(counter.q[X]==1){
                   counter.d=0;
                   autostate.d = autostate.BOOL1;
@@ -205,6 +197,9 @@ module alu_controller (
               
               //BOOLEAN Test 1 (Show "A"):, a = 3, b = 1, ALUFN[3:0] = 1010. Output = 3  
               autostate.BOOL1:
+                seg.values = {4d7, 4d9, 4d9, 4d14};
+                io_seg = seg.seg;
+                io_sel = ~seg.sel;
                 alu.alufn = 6b001010;
                 alu.a = 16b00000011;
                 alu.b = 16b00000001;
@@ -252,6 +247,10 @@ module alu_controller (
                 
               //COMPARE Test 1:, a = 2, b = 2, ALUFN[2:1] = 01 Output = 1 (TRUE) 
               autostate.COMP1:
+                seg.values = {4d12, 4d9, 4d13, 4d14}; // display c o p on multi seg display
+                io_seg = seg.seg;
+                io_sel = ~seg.sel;
+            
                 alu.alufn = 6b000010;
                 alu.a = 16b00000010;
                 alu.b = 16b00000010;
@@ -297,6 +296,10 @@ module alu_controller (
                   autostate.d = autostate.SHIF1;
                 }
               autostate.SHIF1:
+                seg.values = {4d5, 4d14, 4d14, 4d14}; // display S on multi seg display
+                io_seg = seg.seg;
+                io_sel = ~seg.sel;
+            
                 alu.alufn = 6b000000;
                 alu.a = 16b00000011;
                 alu.b = 16b00000010;
