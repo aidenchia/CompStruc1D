@@ -1,5 +1,5 @@
 //! **************************************************************************
-// Written by: Map P.20131013 on Wed Oct 31 09:52:24 2018
+// Written by: Map P.20131013 on Wed Oct 31 09:57:27 2018
 //! **************************************************************************
 
 SCHEMATIC START;
@@ -150,9 +150,9 @@ TIMEGRP clk = BEL "alu/ram1/read_data_5" BEL "alu/ram1/read_data_4" BEL
         "alu/M_counter_q_10" BEL "alu/M_counter_q_11" BEL "alu/M_counter_q_12"
         BEL "alu/M_counter_q_13" BEL "alu/M_counter_q_14" BEL
         "alu/M_counter_q_15" BEL "alu/M_counter_q_20" BEL "alu/M_counter_q_16"
-        BEL "alu/M_counter_q_21" BEL "alu/M_counter_q_17" BEL
-        "alu/M_counter_q_22" BEL "alu/M_counter_q_23" BEL "alu/M_counter_q_18"
-        BEL "alu/M_counter_q_19" BEL "alu/M_counter_q_24" BEL
+        BEL "alu/M_counter_q_21" BEL "alu/M_counter_q_22" BEL
+        "alu/M_counter_q_17" BEL "alu/M_counter_q_18" BEL "alu/M_counter_q_23"
+        BEL "alu/M_counter_q_24" BEL "alu/M_counter_q_19" BEL
         "alu/M_counter_q_25" BEL "alu/M_counter_q_26" BEL "alu/M_counter_q_27"
         BEL "alu/M_counter_q_28" BEL "alu/M_counter_q_29" BEL "clk_BUFGP/BUFG"
         BEL "reset_cond/M_stage_q_3" BEL "reset_cond/M_stage_q_2" BEL

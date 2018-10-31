@@ -224,8 +224,8 @@ INFO:Xst:3210 - "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 16-bit adder for signal <M_alu_out[15]_GND_6_o_add_101_OUT> created at line 405.
-    Found 30-bit adder for signal <M_counter_q[29]_GND_6_o_add_112_OUT> created at line 427.
+    Found 16-bit adder for signal <M_alu_out[15]_GND_6_o_add_112_OUT> created at line 425.
+    Found 30-bit adder for signal <M_counter_q[29]_GND_6_o_add_113_OUT> created at line 427.
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred  30 D-type flip-flop(s).
@@ -603,15 +603,15 @@ Top Level Output File Name         : mojo_top_0.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 784
+# BELS                             : 787
 #      GND                         : 11
 #      INV                         : 9
 #      LUT1                        : 103
 #      LUT2                        : 43
-#      LUT3                        : 17
-#      LUT4                        : 55
-#      LUT5                        : 35
-#      LUT6                        : 236
+#      LUT3                        : 20
+#      LUT4                        : 56
+#      LUT5                        : 36
+#      LUT6                        : 234
 #      MUXCY                       : 120
 #      MUXF7                       : 17
 #      MUXF8                       : 1
@@ -640,16 +640,16 @@ Selected Device : 6slx9tqg144-2
 
 Slice Logic Utilization: 
  Number of Slice Registers:             223  out of  11440     1%  
- Number of Slice LUTs:                  501  out of   5720     8%  
-    Number used as Logic:               498  out of   5720     8%  
+ Number of Slice LUTs:                  504  out of   5720     8%  
+    Number used as Logic:               501  out of   5720     8%  
     Number used as Memory:                3  out of   1440     0%  
        Number used as SRL:                3
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:    607
-   Number with an unused Flip Flop:     384  out of    607    63%  
-   Number with an unused LUT:           106  out of    607    17%  
-   Number of fully used LUT-FF pairs:   117  out of    607    19%  
+ Number of LUT Flip Flop pairs used:    610
+   Number with an unused Flip Flop:     387  out of    610    63%  
+   Number with an unused LUT:           106  out of    610    17%  
+   Number of fully used LUT-FF pairs:   117  out of    610    19%  
    Number of unique control sets:        21
 
 IO Utilization: 
@@ -693,7 +693,7 @@ Speed Grade: -2
 
    Minimum period: 9.400ns (Maximum Frequency: 106.389MHz)
    Minimum input arrival time before clock: 3.526ns
-   Maximum output required time after clock: 13.487ns
+   Maximum output required time after clock: 13.425ns
    Maximum combinational path delay: No path found
 
 Timing Details:
@@ -703,7 +703,7 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
   Clock period: 9.400ns (frequency: 106.389MHz)
-  Total number of paths / destination ports: 14674 / 445
+  Total number of paths / destination ports: 14677 / 445
 -------------------------------------------------------------------------
 Delay:               9.400ns (Levels of Logic = 23)
   Source:            alu/M_autostate_q_FSM_FFd13 (FF)
@@ -735,11 +735,11 @@ Delay:               9.400ns (Levels of Logic = 23)
      LUT4:I0->O            1   0.254   0.790  Mmux_out27 (Mmux_out26)
      LUT6:I4->O            2   0.250   0.726  Mmux_out28 (Mmux_out27)
      end scope: 'alu/alu:Mmux_out27'
-     LUT6:I5->O            1   0.254   0.000  Madd_M_alu_out[15]_GND_6_o_add_101_OUT_lut<0> (Madd_M_alu_out[15]_GND_6_o_add_101_OUT_lut<0>)
-     MUXCY:S->O            1   0.215   0.000  Madd_M_alu_out[15]_GND_6_o_add_101_OUT_cy<0> (Madd_M_alu_out[15]_GND_6_o_add_101_OUT_cy<0>)
-     MUXCY:CI->O           0   0.023   0.000  Madd_M_alu_out[15]_GND_6_o_add_101_OUT_cy<1> (Madd_M_alu_out[15]_GND_6_o_add_101_OUT_cy<1>)
-     XORCY:CI->O           1   0.206   0.682  Madd_M_alu_out[15]_GND_6_o_add_101_OUT_xor<2> (M_alu_out[15]_GND_6_o_add_101_OUT<2>)
-     LUT6:I5->O            1   0.254   0.000  Mmux_M_result_write_data141 (M_result_write_data<2>)
+     LUT6:I5->O            1   0.254   0.000  Madd_M_alu_out[15]_GND_6_o_add_112_OUT_lut<0> (Madd_M_alu_out[15]_GND_6_o_add_112_OUT_lut<0>)
+     MUXCY:S->O            1   0.215   0.000  Madd_M_alu_out[15]_GND_6_o_add_112_OUT_cy<0> (Madd_M_alu_out[15]_GND_6_o_add_112_OUT_cy<0>)
+     MUXCY:CI->O           0   0.023   0.000  Madd_M_alu_out[15]_GND_6_o_add_112_OUT_cy<1> (Madd_M_alu_out[15]_GND_6_o_add_112_OUT_cy<1>)
+     XORCY:CI->O           1   0.206   0.682  Madd_M_alu_out[15]_GND_6_o_add_112_OUT_xor<2> (M_alu_out[15]_GND_6_o_add_112_OUT<2>)
+     LUT3:I2->O            1   0.254   0.000  Mmux_M_result_write_data141 (M_result_write_data<2>)
      begin scope: 'alu/result:write_data<2>'
      FDE:D                     0.074          ram_0_2
     ----------------------------------------
@@ -771,17 +771,17 @@ Offset:              3.526ns (Levels of Logic = 3)
 Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
   Total number of paths / destination ports: 7443 / 27
 -------------------------------------------------------------------------
-Offset:              13.487ns (Levels of Logic = 9)
-  Source:            alu/M_autostate_q_FSM_FFd1 (FF)
+Offset:              13.425ns (Levels of Logic = 9)
+  Source:            alu/M_autostate_q_FSM_FFd9 (FF)
   Destination:       io_led<11> (PAD)
   Source Clock:      clk rising
 
-  Data Path: alu/M_autostate_q_FSM_FFd1 to io_led<11>
+  Data Path: alu/M_autostate_q_FSM_FFd9 to io_led<11>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDR:C->Q             10   0.525   1.236  M_autostate_q_FSM_FFd1 (M_autostate_q_FSM_FFd1)
-     LUT3:I0->O            4   0.235   0.804  Mmux_M_alu_b16_SW0 (N20)
+     FDR:C->Q             15   0.525   1.155  M_autostate_q_FSM_FFd9 (M_autostate_q_FSM_FFd9)
+     LUT3:I2->O            4   0.254   0.804  Mmux_M_alu_b16_SW0 (N20)
      LUT6:I5->O           39   0.254   2.092  Mmux_M_alu_b16 (M_alu_b<0>)
      LUT6:I0->O            2   0.254   1.156  Sh1241 (Sh124)
      LUT6:I1->O            1   0.254   0.958  Mmux_out32 (Mmux_out31)
@@ -791,8 +791,8 @@ Offset:              13.487ns (Levels of Logic = 9)
      end scope: 'alu:out<11>'
      OBUF:I->O                 2.912          io_led_11_OBUF (io_led<11>)
     ----------------------------------------
-    Total                     13.487ns (5.196ns logic, 8.291ns route)
-                                       (38.5% logic, 61.5% route)
+    Total                     13.425ns (5.215ns logic, 8.210ns route)
+                                       (38.8% logic, 61.2% route)
 
 =========================================================================
 
@@ -810,8 +810,8 @@ clk            |    9.400|         |         |         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 10.00 secs
-Total CPU time to Xst completion: 9.45 secs
+Total REAL time to Xst completion: 9.00 secs
+Total CPU time to Xst completion: 9.01 secs
  
 --> 
 

@@ -422,7 +422,7 @@ module alu_controller_10 (
             M_alu_alufn = 6'h20;
             M_alu_a = 16'h0003;
             M_alu_b = 16'h0001;
-            M_result_write_data = M_alu_out;
+            M_result_write_data = M_alu_out + 1'h1;
             M_result_write_en = 1'h1;
             M_counter_d = M_counter_q + 1'h1;
             if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data == 16'h0006) begin

@@ -386,7 +386,7 @@ module alu_controller (
                 alu.alufn = 6b100000;
                 alu.a = 16b11;
                 alu.b = 16b01;
-                result.write_data = alu.out;
+                result.write_data = alu.out + 1;
                 result.write_en = 1;
                 counter.d = counter.q + 1;
             

@@ -178,8 +178,8 @@ INFO:Xst:3210 - "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 16-bit adder for signal <M_alu_out[15]_GND_6_o_add_101_OUT> created at line 405.
-    Found 30-bit adder for signal <M_counter_q[29]_GND_6_o_add_112_OUT> created at line 427.
+    Found 16-bit adder for signal <M_alu_out[15]_GND_6_o_add_112_OUT> created at line 425.
+    Found 30-bit adder for signal <M_counter_q[29]_GND_6_o_add_113_OUT> created at line 427.
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred  30 D-type flip-flop(s).
@@ -571,7 +571,7 @@ Speed Grade: -2
 
    Minimum period: 9.400ns (Maximum Frequency: 106.389MHz)
    Minimum input arrival time before clock: 3.526ns
-   Maximum output required time after clock: 13.487ns
+   Maximum output required time after clock: 13.425ns
    Maximum combinational path delay: No path found
 
 =========================================================================
