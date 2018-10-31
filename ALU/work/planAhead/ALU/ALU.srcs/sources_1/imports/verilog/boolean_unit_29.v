@@ -4,7 +4,7 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module boolean_unit_27 (
+module boolean_unit_29 (
     input [5:0] alufn,
     input [15:0] a,
     input [15:0] b,

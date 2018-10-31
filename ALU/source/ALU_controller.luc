@@ -28,6 +28,7 @@ module alu_controller (
     simple_ram result (#SIZE(16), #DEPTH(1));
   }
   
+  checker checker;
   alu_unit alu;
   const X = 29;
 
@@ -54,6 +55,11 @@ module alu_controller (
     alu.alufn = 16bx;
     alu.a = 16bx;
     alu.b = 16bx;
+    
+    checker.alufn = 16bx;
+    checker.a = 16bx;
+    checker.b = 16bx;
+    checker.alu_input = 16bx;
     
     out = 16b0;
     io_sel = ~4b1111;
@@ -303,48 +309,96 @@ module alu_controller (
                 }
             
           autostate.DEMOADDERROR:
-                seg.values = {5d4, 5d1, 5d19, 5d17}; // display A d 3 1 on multi seg display
+          
+                // Pass alufn = 000000 into alu_unit, so that it will run the add operation
+                alu.alufn = 6b000000; 
+                
+                // set the values of a and b and write the result to the ram
+                alu.a = 16b10;
+                alu.b = 16b1;  
+                result.write_data = alu.out + 1;
+                result.write_en = 1; 
+                     
+                
+                seg.values = {5d4, 5d1, 5d18, 5d17}; // display A d 2 1 on multi seg display
                 io_seg = seg.seg;
                 io_sel = ~seg.sel;
                 counter.d = counter.q + 1;
                 
-                if(counter.q[X]==1){
-                  counter.d = 0;
-                  autostate.d = autostate.ADDERERROR;
+                if(counter.q[X]==1 && result.read_data==16b11){  // means it's correct!
+                  counter.d =0;
+                  autostate.d = autostate.BOOL1;
                 }
+                
+                else if(counter.q[X]==1 && result.read_data!=16b11){ // checking mechanism
+                  counter.d=0;
+                  autostate.d=autostate.ADDERERROR;
+                } 
             
           autostate.DEMOBOOLERROR:
-                seg.values = {5d7, 5d9, 5d19, 5d17}; // display b o 2 1 on multi seg display
+                seg.values = {5d7, 5d9, 5d19, 5d17}; // display b o 3 1 on multi seg display
                 io_seg = seg.seg;
                 io_sel = ~seg.sel;
+            
+                alu.alufn = 6b011010;
+                alu.a = 16b11;
+                alu.b = 16b1;
+                result.write_data = alu.out + 1;
+                result.write_en = 1;
                 counter.d = counter.q + 1;             
                
-                if(counter.q[X]==1){
-                  counter.d = 0;
-                  autostate.d = autostate.BOOLERROR;
+                if(counter.q[X]==1 && result.read_data==16b11){ // means it's correct!
+                  counter.d =0;
+                  autostate.d = autostate.COMP1;
                 }
+                
+                else if(counter.q[X]==1 && result.read_data!=16b11){ // checking mechanism
+                  counter.d=0;
+                  autostate.d=autostate.BOOLERROR; // adder has error, now let's check BOOL
+                }                  
             
           autostate.DEMOCOMPERROR:
-                seg.values = {5d12, 5d9, 5d17, 5d18}; // display c o 1 2 on multi seg display
+                seg.values = {5d12, 5d9, 5d18, 5d18}; // display c o 2 2 on multi seg display
                 io_seg = seg.seg;
                 io_sel = ~seg.sel;
+                alu.alufn = 6b110011;
+                alu.a = 16b10;
+                alu.b = 16b10;
+                result.write_data = alu.out + 1;
+                result.write_en = 1;
                 counter.d = counter.q + 1;  
             
-                if(counter.q[X]==1){
-                  counter.d = 0;
-                  autostate.d = autostate.COMPERROR;
+                if(counter.q[X]==1&&result.read_data==16b01){ // means it's working!
+                  counter.d =0;
+                  autostate.d = autostate.SHIF1; // now let's check SHIFT
+                }
+                
+                else if(counter.q[X]==1&&result.read_data!=16b01){ // checking mechanism
+                  counter.d=0;
+                  autostate.d=autostate.COMPERROR;
                 }
             
           autostate.DEMOSHIFERROR:
-                seg.values = {5d5, 5d2, 5d17, 5d17}; // display S L 3 1  on multi seg display
-                io_seg = seg.seg; 
+                seg.values = {5d5, 5d2, 5d19, 5d17}; // display S L 3 1  on multi seg display
+                io_seg = seg.seg;
                 io_sel = ~seg.sel;
+            
+                alu.alufn = 6b100000;
+                alu.a = 16b11;
+                alu.b = 16b01;
+                result.write_data = alu.out;
+                result.write_en = 1;
                 counter.d = counter.q + 1;
             
-                if(counter.q[X]==1){
-                  counter.d = 0;
-                  autostate.d = autostate.SHIFERROR;
-                }     
+                if(counter.q[X]==1&&result.read_data==16b110){ // means its correct!
+                  counter.d =0;
+                  autostate.d = autostate.DEMOADDERROR; // if they are all working, let's go through the error states for demonstration purpose
+                }
+                
+                else if(counter.q[X]==1&&result.read_data!=16b110){ // checking mechanism
+                  counter.d=0;
+                  autostate.d=autostate.SHIFERROR;
+                }   
             }
     } // case ending parenthesis          
   } // always ending parenthesis  

@@ -1,0 +1,19 @@
+module checker (
+    input alu_input[16], 
+    input alufn[6],
+    input a[16],
+    input b[16],
+    output truth
+  ) {
+  
+  alu_unit alu;
+
+  always {
+  
+    alu.alufn = alufn;
+    alu.a = a;
+    alu.b = b;
+    
+    truth = alu_input == alu.out;
+  }
+}

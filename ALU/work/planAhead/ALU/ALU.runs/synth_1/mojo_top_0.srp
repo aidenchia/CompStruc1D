@@ -3,7 +3,7 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 --> 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.06 secs
+Total CPU time to Xst completion: 0.08 secs
  
 --> Reading design: mojo_top_0.prj
 
@@ -53,39 +53,41 @@ Netlist Hierarchy                  : rebuilt
 =========================================================================
 *                          HDL Parsing                                  *
 =========================================================================
-Analyzing Verilog file "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/shifter_unit_25.v" into library work
-Parsing module <shifter_unit_25>.
-Analyzing Verilog file "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/seven_seg_22.v" into library work
-Parsing module <seven_seg_22>.
-Analyzing Verilog file "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/decoder_23.v" into library work
-Parsing module <decoder_23>.
-Analyzing Verilog file "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/counter_21.v" into library work
-Parsing module <counter_21>.
-Analyzing Verilog file "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/compare_unit_24.v" into library work
-Parsing module <compare_unit_24>.
-Analyzing Verilog file "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/boolean_unit_27.v" into library work
-Parsing module <boolean_unit_27>.
-Analyzing Verilog file "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/adder_unit_26.v" into library work
-Parsing module <adder_unit_26>.
-Analyzing Verilog file "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/simple_ram_17.v" into library work
+Analyzing Verilog file "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/shifter_unit_27.v" into library work
+Parsing module <shifter_unit_27>.
+Analyzing Verilog file "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/compare_unit_26.v" into library work
+Parsing module <compare_unit_26>.
+Analyzing Verilog file "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/boolean_unit_29.v" into library work
+Parsing module <boolean_unit_29>.
+Analyzing Verilog file "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/adder_unit_28.v" into library work
+Parsing module <adder_unit_28>.
+Analyzing Verilog file "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/seven_seg_23.v" into library work
+Parsing module <seven_seg_23>.
+Analyzing Verilog file "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/decoder_24.v" into library work
+Parsing module <decoder_24>.
+Analyzing Verilog file "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/counter_22.v" into library work
+Parsing module <counter_22>.
+Analyzing Verilog file "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/alu_unit_21.v" into library work
+Parsing module <alu_unit_21>.
+Analyzing Verilog file "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/simple_ram_17.v" into library work
 Parsing module <simple_ram_17>.
-Analyzing Verilog file "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/simple_ram_16.v" into library work
+Analyzing Verilog file "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/simple_ram_16.v" into library work
 Parsing module <simple_ram_16>.
-Analyzing Verilog file "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/pipeline_11.v" into library work
+Analyzing Verilog file "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/pipeline_11.v" into library work
 Parsing module <pipeline_11>.
-Analyzing Verilog file "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/multi_seven_seg_15.v" into library work
+Analyzing Verilog file "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/multi_seven_seg_15.v" into library work
 Parsing module <multi_seven_seg_15>.
-Analyzing Verilog file "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/alu_unit_20.v" into library work
-Parsing module <alu_unit_20>.
-Analyzing Verilog file "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/reset_conditioner_1.v" into library work
+Analyzing Verilog file "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/checker_20.v" into library work
+Parsing module <checker_20>.
+Analyzing Verilog file "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/reset_conditioner_1.v" into library work
 Parsing module <reset_conditioner_1>.
-Analyzing Verilog file "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/edge_detector_3.v" into library work
+Analyzing Verilog file "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/edge_detector_3.v" into library work
 Parsing module <edge_detector_3>.
-Analyzing Verilog file "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/button_conditioner_2.v" into library work
+Analyzing Verilog file "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/button_conditioner_2.v" into library work
 Parsing module <button_conditioner_2>.
-Analyzing Verilog file "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/ALU_controller_10.v" into library work
+Analyzing Verilog file "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/ALU_controller_10.v" into library work
 Parsing module <alu_controller_10>.
-Analyzing Verilog file "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/mojo_top_0.v" into library work
+Analyzing Verilog file "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/mojo_top_0.v" into library work
 Parsing module <mojo_top_0>.
 
 =========================================================================
@@ -106,34 +108,39 @@ Elaborating module <alu_controller_10>.
 
 Elaborating module <multi_seven_seg_15>.
 
-Elaborating module <counter_21>.
+Elaborating module <counter_22>.
 
-Elaborating module <seven_seg_22>.
+Elaborating module <seven_seg_23>.
 
-Elaborating module <decoder_23>.
+Elaborating module <decoder_24>.
 
 Elaborating module <simple_ram_16(SIZE=3'b110,DEPTH=1'b1)>.
 
 Elaborating module <simple_ram_17(SIZE=5'b10000,DEPTH=1'b1)>.
 
-Elaborating module <alu_unit_20>.
+Elaborating module <checker_20>.
 
-Elaborating module <compare_unit_24>.
+Elaborating module <alu_unit_21>.
 
-Elaborating module <shifter_unit_25>.
+Elaborating module <compare_unit_26>.
 
-Elaborating module <adder_unit_26>.
+Elaborating module <shifter_unit_27>.
 
-Elaborating module <boolean_unit_27>.
-WARNING:HDLCompiler:413 - "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/ALU_controller_10.v" Line 133: Result of 16-bit expression is truncated to fit in 6-bit target.
-WARNING:HDLCompiler:413 - "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/ALU_controller_10.v" Line 156: Result of 16-bit expression is truncated to fit in 6-bit target.
+Elaborating module <adder_unit_28>.
+
+Elaborating module <boolean_unit_29>.
+WARNING:HDLCompiler:1127 - "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/ALU_controller_10.v" Line 112: Assignment to M_checker_truth ignored, since the identifier is never used
+WARNING:HDLCompiler:413 - "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/ALU_controller_10.v" Line 146: Result of 16-bit expression is truncated to fit in 6-bit target.
+WARNING:HDLCompiler:413 - "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/ALU_controller_10.v" Line 149: Result of 16-bit expression is truncated to fit in 6-bit target.
+WARNING:HDLCompiler:413 - "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/ALU_controller_10.v" Line 173: Result of 16-bit expression is truncated to fit in 6-bit target.
+WARNING:Xst:2972 - "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/ALU_controller_10.v" line 107. All outputs of instance <checker> of block <checker_20> are unconnected in block <alu_controller_10>. Underlying logic will be removed.
 
 =========================================================================
 *                           HDL Synthesis                               *
 =========================================================================
 
 Synthesizing Unit <mojo_top_0>.
-    Related source file is "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/mojo_top_0.v".
+    Related source file is "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/mojo_top_0.v".
 WARNING:Xst:647 - Input <io_button<2:2>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <io_dip<23:16>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <cclk> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
@@ -153,14 +160,14 @@ WARNING:Xst:647 - Input <avr_rx_busy> is never used. This port will be preserved
 Unit <mojo_top_0> synthesized.
 
 Synthesizing Unit <reset_conditioner_1>.
-    Related source file is "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/reset_conditioner_1.v".
+    Related source file is "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/reset_conditioner_1.v".
     Found 4-bit register for signal <M_stage_q>.
     Summary:
 	inferred   4 D-type flip-flop(s).
 Unit <reset_conditioner_1> synthesized.
 
 Synthesizing Unit <button_conditioner_2>.
-    Related source file is "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/button_conditioner_2.v".
+    Related source file is "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/button_conditioner_2.v".
     Found 20-bit register for signal <M_ctr_q>.
     Found 20-bit adder for signal <M_ctr_q[19]_GND_3_o_add_2_OUT> created at line 39.
     Summary:
@@ -169,22 +176,23 @@ Synthesizing Unit <button_conditioner_2>.
 Unit <button_conditioner_2> synthesized.
 
 Synthesizing Unit <pipeline_11>.
-    Related source file is "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/pipeline_11.v".
+    Related source file is "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/pipeline_11.v".
     Found 2-bit register for signal <M_pipe_q>.
     Summary:
 	inferred   2 D-type flip-flop(s).
 Unit <pipeline_11> synthesized.
 
 Synthesizing Unit <edge_detector_3>.
-    Related source file is "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/edge_detector_3.v".
+    Related source file is "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/edge_detector_3.v".
     Found 1-bit register for signal <M_last_q>.
     Summary:
 	inferred   1 D-type flip-flop(s).
 Unit <edge_detector_3> synthesized.
 
 Synthesizing Unit <alu_controller_10>.
-    Related source file is "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/ALU_controller_10.v".
+    Related source file is "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/ALU_controller_10.v".
 WARNING:Xst:647 - Input <auto_button> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+INFO:Xst:3210 - "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/ALU_controller_10.v" line 107: Output port <truth> of the instance <checker> is unconnected or connected to loadless signal.
     Found 3-bit register for signal <M_fsm_controller_q>.
     Found 4-bit register for signal <M_autostate_q>.
     Found 30-bit register for signal <M_counter_q>.
@@ -205,7 +213,7 @@ WARNING:Xst:647 - Input <auto_button> is never used. This port will be preserved
     Found finite state machine <FSM_1> for signal <M_autostate_q>.
     -----------------------------------------------------------------------
     | States             | 13                                             |
-    | Transitions        | 69                                             |
+    | Transitions        | 73                                             |
     | Inputs             | 8                                              |
     | Outputs            | 32                                             |
     | Clock              | clk (rising_edge)                              |
@@ -216,16 +224,17 @@ WARNING:Xst:647 - Input <auto_button> is never used. This port will be preserved
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 30-bit adder for signal <M_counter_q[29]_GND_6_o_add_94_OUT> created at line 375.
+    Found 16-bit adder for signal <M_alu_out[15]_GND_6_o_add_101_OUT> created at line 405.
+    Found 30-bit adder for signal <M_counter_q[29]_GND_6_o_add_112_OUT> created at line 427.
     Summary:
-	inferred   1 Adder/Subtractor(s).
+	inferred   2 Adder/Subtractor(s).
 	inferred  30 D-type flip-flop(s).
-	inferred  36 Multiplexer(s).
+	inferred  41 Multiplexer(s).
 	inferred   2 Finite State Machine(s).
 Unit <alu_controller_10> synthesized.
 
 Synthesizing Unit <multi_seven_seg_15>.
-    Related source file is "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/multi_seven_seg_15.v".
+    Related source file is "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/multi_seven_seg_15.v".
     Found 5-bit adder for signal <M_ctr_value[1]_GND_7_o_add_1_OUT> created at line 48.
     Found 2x3-bit multiplier for signal <n0017> created at line 48.
     Found 39-bit shifter logical right for signal <n0011> created at line 48
@@ -235,31 +244,31 @@ Synthesizing Unit <multi_seven_seg_15>.
 	inferred   1 Combinational logic shifter(s).
 Unit <multi_seven_seg_15> synthesized.
 
-Synthesizing Unit <counter_21>.
-    Related source file is "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/counter_21.v".
+Synthesizing Unit <counter_22>.
+    Related source file is "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/counter_22.v".
     Found 18-bit register for signal <M_ctr_q>.
     Found 18-bit adder for signal <M_ctr_q[17]_GND_8_o_add_0_OUT> created at line 35.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred  18 D-type flip-flop(s).
 	inferred   1 Multiplexer(s).
-Unit <counter_21> synthesized.
+Unit <counter_22> synthesized.
 
-Synthesizing Unit <seven_seg_22>.
-    Related source file is "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/seven_seg_22.v".
+Synthesizing Unit <seven_seg_23>.
+    Related source file is "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/seven_seg_23.v".
     Found 32x8-bit Read Only RAM for signal <out>
     Summary:
 	inferred   1 RAM(s).
-Unit <seven_seg_22> synthesized.
+Unit <seven_seg_23> synthesized.
 
-Synthesizing Unit <decoder_23>.
-    Related source file is "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/decoder_23.v".
+Synthesizing Unit <decoder_24>.
+    Related source file is "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/decoder_24.v".
     Summary:
 	no macro.
-Unit <decoder_23> synthesized.
+Unit <decoder_24> synthesized.
 
 Synthesizing Unit <simple_ram_16>.
-    Related source file is "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/simple_ram_16.v".
+    Related source file is "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/simple_ram_16.v".
         SIZE = 3'b110
         DEPTH = 1'b1
     Found 6-bit register for signal <ram<0>>.
@@ -271,7 +280,7 @@ Synthesizing Unit <simple_ram_16>.
 Unit <simple_ram_16> synthesized.
 
 Synthesizing Unit <simple_ram_17>.
-    Related source file is "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/simple_ram_17.v".
+    Related source file is "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/simple_ram_17.v".
         SIZE = 5'b10000
         DEPTH = 1'b1
     Found 16-bit register for signal <ram<0>>.
@@ -282,24 +291,24 @@ Synthesizing Unit <simple_ram_17>.
 	inferred   1 Comparator(s).
 Unit <simple_ram_17> synthesized.
 
-Synthesizing Unit <alu_unit_20>.
-    Related source file is "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/alu_unit_20.v".
+Synthesizing Unit <alu_unit_21>.
+    Related source file is "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/alu_unit_21.v".
     Found 16-bit 4-to-1 multiplexer for signal <out> created at line 83.
     Summary:
 	inferred   1 Multiplexer(s).
-Unit <alu_unit_20> synthesized.
+Unit <alu_unit_21> synthesized.
 
-Synthesizing Unit <compare_unit_24>.
-    Related source file is "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/compare_unit_24.v".
+Synthesizing Unit <compare_unit_26>.
+    Related source file is "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/compare_unit_26.v".
 WARNING:Xst:647 - Input <alufn<0:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <alufn<5:3>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
     Found 16-bit 4-to-1 multiplexer for signal <out> created at line 19.
     Summary:
 	inferred   1 Multiplexer(s).
-Unit <compare_unit_24> synthesized.
+Unit <compare_unit_26> synthesized.
 
-Synthesizing Unit <shifter_unit_25>.
-    Related source file is "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/shifter_unit_25.v".
+Synthesizing Unit <shifter_unit_27>.
+    Related source file is "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/shifter_unit_27.v".
 WARNING:Xst:647 - Input <b<15:4>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <alufn<5:2>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
     Found 16-bit shifter logical left for signal <a[15]_b[3]_shift_left_0_OUT> created at line 20
@@ -309,25 +318,25 @@ WARNING:Xst:647 - Input <alufn<5:2>> is never used. This port will be preserved 
     Summary:
 	inferred   1 Multiplexer(s).
 	inferred   3 Combinational logic shifter(s).
-Unit <shifter_unit_25> synthesized.
+Unit <shifter_unit_27> synthesized.
 
-Synthesizing Unit <adder_unit_26>.
-    Related source file is "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/adder_unit_26.v".
+Synthesizing Unit <adder_unit_28>.
+    Related source file is "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/adder_unit_28.v".
 WARNING:Xst:647 - Input <alufn<5:1>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
     Found 16-bit subtractor for signal <a[15]_b[15]_sub_2_OUT> created at line 26.
     Found 16-bit adder for signal <a[15]_b[15]_add_2_OUT> created at line 29.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred   1 Multiplexer(s).
-Unit <adder_unit_26> synthesized.
+Unit <adder_unit_28> synthesized.
 
-Synthesizing Unit <boolean_unit_27>.
-    Related source file is "C:/Users/aidenchia/Documents/mojo/Mojo Notes/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/boolean_unit_27.v".
+Synthesizing Unit <boolean_unit_29>.
+    Related source file is "C:/Users/wooge/OneDrive/Desktop/CompStruc1D/ALU/work/planAhead/ALU/ALU.srcs/sources_1/imports/verilog/boolean_unit_29.v".
 WARNING:Xst:647 - Input <alufn<5:4>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
     Found 16-bit 16-to-1 multiplexer for signal <out> created at line 18.
     Summary:
 	inferred   1 Multiplexer(s).
-Unit <boolean_unit_27> synthesized.
+Unit <boolean_unit_29> synthesized.
 
 =========================================================================
 HDL Synthesis Report
@@ -337,7 +346,8 @@ Macro Statistics
  32x8-bit single-port Read Only RAM                    : 1
 # Multipliers                                          : 1
  3x2-bit multiplier                                    : 1
-# Adders/Subtractors                                   : 8
+# Adders/Subtractors                                   : 9
+ 16-bit adder                                          : 1
  16-bit addsub                                         : 1
  18-bit adder                                          : 1
  20-bit adder                                          : 4
@@ -355,13 +365,13 @@ Macro Statistics
 # Comparators                                          : 4
  2-bit comparator greater                              : 1
  2-bit comparator lessequal                            : 3
-# Multiplexers                                         : 42
+# Multiplexers                                         : 47
  1-bit 2-to-1 multiplexer                              : 1
  16-bit 16-to-1 multiplexer                            : 1
- 16-bit 2-to-1 multiplexer                             : 8
+ 16-bit 2-to-1 multiplexer                             : 9
  16-bit 4-to-1 multiplexer                             : 3
  18-bit 2-to-1 multiplexer                             : 1
- 30-bit 2-to-1 multiplexer                             : 15
+ 30-bit 2-to-1 multiplexer                             : 19
  4-bit 2-to-1 multiplexer                              : 6
  6-bit 2-to-1 multiplexer                              : 1
  8-bit 2-to-1 multiplexer                              : 6
@@ -387,15 +397,15 @@ Synthesizing (advanced) Unit <button_conditioner_2>.
 The following registers are absorbed into counter <M_ctr_q>: 1 register on signal <M_ctr_q>.
 Unit <button_conditioner_2> synthesized (advanced).
 
-Synthesizing (advanced) Unit <counter_21>.
+Synthesizing (advanced) Unit <counter_22>.
 The following registers are absorbed into counter <M_ctr_q>: 1 register on signal <M_ctr_q>.
-Unit <counter_21> synthesized (advanced).
+Unit <counter_22> synthesized (advanced).
 
 Synthesizing (advanced) Unit <multi_seven_seg_15>.
 	Multiplier <Mmult_n0017> in block <multi_seven_seg_15> and adder/subtractor <Madd_M_ctr_value[1]_GND_7_o_add_1_OUT> in block <multi_seven_seg_15> are combined into a MAC<Maddsub_n0017>.
 Unit <multi_seven_seg_15> synthesized (advanced).
 
-Synthesizing (advanced) Unit <seven_seg_22>.
+Synthesizing (advanced) Unit <seven_seg_23>.
 INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram_out> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
     -----------------------------------------------------------------------
     | ram_type           | Distributed                         |          |
@@ -407,7 +417,7 @@ INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram_out> will be implemented on LUTs eit
     |     diA            | connected to signal <GND>           |          |
     |     doA            | connected to signal <out>           |          |
     -----------------------------------------------------------------------
-Unit <seven_seg_22> synthesized (advanced).
+Unit <seven_seg_23> synthesized (advanced).
 
 =========================================================================
 Advanced HDL Synthesis Report
@@ -417,7 +427,8 @@ Macro Statistics
  32x8-bit single-port distributed Read Only RAM        : 1
 # MACs                                                 : 1
  3x2-to-5-bit MAC                                      : 1
-# Adders/Subtractors                                   : 2
+# Adders/Subtractors                                   : 3
+ 16-bit adder                                          : 1
  16-bit addsub                                         : 1
  30-bit adder                                          : 1
 # Counters                                             : 5
@@ -428,12 +439,12 @@ Macro Statistics
 # Comparators                                          : 4
  2-bit comparator greater                              : 1
  2-bit comparator lessequal                            : 3
-# Multiplexers                                         : 41
+# Multiplexers                                         : 46
  1-bit 2-to-1 multiplexer                              : 1
  16-bit 16-to-1 multiplexer                            : 1
- 16-bit 2-to-1 multiplexer                             : 8
+ 16-bit 2-to-1 multiplexer                             : 9
  16-bit 4-to-1 multiplexer                             : 3
- 30-bit 2-to-1 multiplexer                             : 15
+ 30-bit 2-to-1 multiplexer                             : 19
  4-bit 2-to-1 multiplexer                              : 6
  6-bit 2-to-1 multiplexer                              : 1
  8-bit 2-to-1 multiplexer                              : 6
@@ -492,9 +503,9 @@ Optimizing unit <alu_controller_10> ...
 
 Optimizing unit <simple_ram_17> ...
 
-Optimizing unit <adder_unit_26> ...
+Optimizing unit <adder_unit_28> ...
 
-Optimizing unit <boolean_unit_27> ...
+Optimizing unit <boolean_unit_29> ...
 WARNING:Xst:2677 - Node <auto_button/sync/M_pipe_q_1> of sequential type is unconnected in block <mojo_top_0>.
 WARNING:Xst:2677 - Node <auto_button/sync/M_pipe_q_0> of sequential type is unconnected in block <mojo_top_0>.
 WARNING:Xst:2677 - Node <auto_edge/M_last_q> of sequential type is unconnected in block <mojo_top_0>.
@@ -548,9 +559,9 @@ WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <alu/result/read_dat
 Mapping all equations...
 Building and optimizing final netlist ...
 Found area constraint ratio of 100 (+ 0) on block mojo_top_0, actual ratio is 10.
-FlipFlop alu/M_autostate_q_FSM_FFd10 has been replicated 1 time(s)
+FlipFlop alu/M_autostate_q_FSM_FFd6 has been replicated 1 time(s)
 FlipFlop alu/M_autostate_q_FSM_FFd7 has been replicated 1 time(s)
-FlipFlop alu/M_fsm_controller_q_FSM_FFd1 has been replicated 9 time(s)
+FlipFlop alu/M_fsm_controller_q_FSM_FFd1 has been replicated 5 time(s)
 FlipFlop alu/ram1/read_data_0 has been replicated 1 time(s)
 
 Final Macro Processing ...
@@ -566,8 +577,8 @@ Unit <mojo_top_0> processed.
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 225
- Flip-Flops                                            : 225
+# Registers                                            : 221
+ Flip-Flops                                            : 221
 # Shift Registers                                      : 3
  2-bit shift register                                  : 3
 
@@ -592,24 +603,24 @@ Top Level Output File Name         : mojo_top_0.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 767
+# BELS                             : 772
 #      GND                         : 11
 #      INV                         : 9
 #      LUT1                        : 103
-#      LUT2                        : 34
-#      LUT3                        : 20
-#      LUT4                        : 58
-#      LUT5                        : 56
-#      LUT6                        : 210
-#      MUXCY                       : 118
-#      MUXF7                       : 13
+#      LUT2                        : 40
+#      LUT3                        : 18
+#      LUT4                        : 56
+#      LUT5                        : 31
+#      LUT6                        : 235
+#      MUXCY                       : 120
+#      MUXF7                       : 11
 #      MUXF8                       : 1
 #      VCC                         : 10
-#      XORCY                       : 124
-# FlipFlops/Latches                : 228
+#      XORCY                       : 127
+# FlipFlops/Latches                : 224
 #      FD                          : 45
 #      FDE                         : 44
-#      FDR                         : 44
+#      FDR                         : 40
 #      FDRE                        : 90
 #      FDS                         : 5
 # Shift Registers                  : 3
@@ -628,17 +639,17 @@ Selected Device : 6slx9tqg144-2
 
 
 Slice Logic Utilization: 
- Number of Slice Registers:             228  out of  11440     1%  
- Number of Slice LUTs:                  493  out of   5720     8%  
-    Number used as Logic:               490  out of   5720     8%  
+ Number of Slice Registers:             224  out of  11440     1%  
+ Number of Slice LUTs:                  495  out of   5720     8%  
+    Number used as Logic:               492  out of   5720     8%  
     Number used as Memory:                3  out of   1440     0%  
        Number used as SRL:                3
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:    594
-   Number with an unused Flip Flop:     366  out of    594    61%  
-   Number with an unused LUT:           101  out of    594    17%  
-   Number of fully used LUT-FF pairs:   127  out of    594    21%  
+ Number of LUT Flip Flop pairs used:    600
+   Number with an unused Flip Flop:     376  out of    600    62%  
+   Number with an unused LUT:           105  out of    600    17%  
+   Number of fully used LUT-FF pairs:   119  out of    600    19%  
    Number of unique control sets:        21
 
 IO Utilization: 
@@ -669,7 +680,7 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-clk                                | BUFGP                  | 231   |
+clk                                | BUFGP                  | 227   |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -680,9 +691,9 @@ Timing Summary:
 ---------------
 Speed Grade: -2
 
-   Minimum period: 7.377ns (Maximum Frequency: 135.552MHz)
+   Minimum period: 9.427ns (Maximum Frequency: 106.075MHz)
    Minimum input arrival time before clock: 3.526ns
-   Maximum output required time after clock: 11.876ns
+   Maximum output required time after clock: 13.487ns
    Maximum combinational path delay: No path found
 
 Timing Details:
@@ -691,45 +702,42 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
-  Clock period: 7.377ns (frequency: 135.552MHz)
-  Total number of paths / destination ports: 6991 / 455
+  Clock period: 9.427ns (frequency: 106.075MHz)
+  Total number of paths / destination ports: 14316 / 447
 -------------------------------------------------------------------------
-Delay:               7.377ns (Levels of Logic = 19)
-  Source:            alu/M_autostate_q_FSM_FFd4 (FF)
-  Destination:       alu/result/ram_0_0 (FF)
+Delay:               9.427ns (Levels of Logic = 16)
+  Source:            alu/M_fsm_controller_q_FSM_FFd1_1 (FF)
+  Destination:       alu/result/ram_0_2 (FF)
   Source Clock:      clk rising
   Destination Clock: clk rising
 
-  Data Path: alu/M_autostate_q_FSM_FFd4 to alu/result/ram_0_0
+  Data Path: alu/M_fsm_controller_q_FSM_FFd1_1 to alu/result/ram_0_2
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDR:C->Q             21   0.525   1.310  M_autostate_q_FSM_FFd4 (M_autostate_q_FSM_FFd4)
-     LUT6:I5->O           13   0.254   1.098  Mmux_M_alu_a151 (M_alu_a<1>)
-     begin scope: 'alu/alu:a<1>'
-     begin scope: 'alu/alu/adder:a<1>'
-     LUT4:I3->O            1   0.254   0.000  Maddsub_sum_lut<1> (Maddsub_sum_lut<1>)
-     MUXCY:S->O            1   0.215   0.000  Maddsub_sum_cy<1> (Maddsub_sum_cy<1>)
-     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<2> (Maddsub_sum_cy<2>)
-     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<3> (Maddsub_sum_cy<3>)
-     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<4> (Maddsub_sum_cy<4>)
-     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<5> (Maddsub_sum_cy<5>)
-     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<6> (Maddsub_sum_cy<6>)
-     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<7> (Maddsub_sum_cy<7>)
-     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<8> (Maddsub_sum_cy<8>)
-     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<9> (Maddsub_sum_cy<9>)
-     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<10> (Maddsub_sum_cy<10>)
-     XORCY:CI->O           2   0.206   1.002  Maddsub_sum_xor<11> (out<11>)
-     end scope: 'alu/alu/adder:out<11>'
-     LUT4:I0->O            1   0.254   0.790  Mmux_out27 (Mmux_out26)
-     LUT6:I4->O            1   0.250   0.682  Mmux_out28 (Mmux_out27)
-     LUT6:I5->O            2   0.254   0.000  Mmux_out29 (out<0>)
-     end scope: 'alu/alu:out<0>'
-     begin scope: 'alu/result:write_data<0>'
-     FDE:D                     0.074          ram_0_0
+     FDR:C->Q              9   0.525   0.976  M_fsm_controller_q_FSM_FFd1_1 (M_fsm_controller_q_FSM_FFd1_1)
+     LUT2:I1->O           14   0.254   1.582  Mmux_M_alu_a51 (M_alu_a<11>)
+     begin scope: 'alu/alu:a<11>'
+     begin scope: 'alu/alu/boolean:a<11>'
+     LUT6:I0->O            1   0.254   0.000  a[15]_reduce_nor_7_o1_F (N69)
+     MUXF7:I0->O           1   0.163   0.682  a[15]_reduce_nor_7_o1 (a[15]_reduce_nor_7_o1)
+     LUT6:I5->O            1   0.254   0.682  a[15]_reduce_nor_7_o2 (a[15]_reduce_nor_7_o2)
+     LUT6:I5->O            1   0.254   0.682  a[15]_reduce_nor_7_o6 (a[15]_reduce_nor_7_o)
+     LUT6:I5->O            1   0.254   0.000  Mmux_out_4 (Mmux_out_4)
+     MUXF7:I1->O           1   0.175   0.000  Mmux_out_3_f7 (Mmux_out_3_f7)
+     MUXF8:I1->O           2   0.152   0.834  Mmux_out_2_f8 (out<0>)
+     end scope: 'alu/alu/boolean:out<0>'
+     end scope: 'alu/alu:M_boolean_out<0>'
+     LUT6:I4->O            1   0.250   0.000  Madd_M_alu_out[15]_GND_6_o_add_101_OUT_lut<0> (Madd_M_alu_out[15]_GND_6_o_add_101_OUT_lut<0>)
+     MUXCY:S->O            1   0.215   0.000  Madd_M_alu_out[15]_GND_6_o_add_101_OUT_cy<0> (Madd_M_alu_out[15]_GND_6_o_add_101_OUT_cy<0>)
+     MUXCY:CI->O           0   0.023   0.000  Madd_M_alu_out[15]_GND_6_o_add_101_OUT_cy<1> (Madd_M_alu_out[15]_GND_6_o_add_101_OUT_cy<1>)
+     XORCY:CI->O           1   0.206   0.682  Madd_M_alu_out[15]_GND_6_o_add_101_OUT_xor<2> (M_alu_out[15]_GND_6_o_add_101_OUT<2>)
+     LUT6:I5->O            1   0.254   0.000  Mmux_M_result_write_data141 (M_result_write_data<2>)
+     begin scope: 'alu/result:write_data<2>'
+     FDE:D                     0.074          ram_0_2
     ----------------------------------------
-    Total                      7.377ns (2.495ns logic, 4.882ns route)
-                                       (33.8% logic, 66.2% route)
+    Total                      9.427ns (3.307ns logic, 6.120ns route)
+                                       (35.1% logic, 64.9% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
@@ -754,44 +762,30 @@ Offset:              3.526ns (Levels of Logic = 3)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
-  Total number of paths / destination ports: 6073 / 27
+  Total number of paths / destination ports: 7246 / 27
 -------------------------------------------------------------------------
-Offset:              11.876ns (Levels of Logic = 21)
-  Source:            alu/M_autostate_q_FSM_FFd4 (FF)
-  Destination:       io_led<0> (PAD)
+Offset:              13.487ns (Levels of Logic = 9)
+  Source:            alu/M_autostate_q_FSM_FFd1 (FF)
+  Destination:       io_led<11> (PAD)
   Source Clock:      clk rising
 
-  Data Path: alu/M_autostate_q_FSM_FFd4 to io_led<0>
+  Data Path: alu/M_autostate_q_FSM_FFd1 to io_led<11>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDR:C->Q             21   0.525   1.310  M_autostate_q_FSM_FFd4 (M_autostate_q_FSM_FFd4)
-     LUT6:I5->O           13   0.254   1.098  Mmux_M_alu_a151 (M_alu_a<1>)
-     begin scope: 'alu/alu:a<1>'
-     begin scope: 'alu/alu/adder:a<1>'
-     LUT4:I3->O            1   0.254   0.000  Maddsub_sum_lut<1> (Maddsub_sum_lut<1>)
-     MUXCY:S->O            1   0.215   0.000  Maddsub_sum_cy<1> (Maddsub_sum_cy<1>)
-     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<2> (Maddsub_sum_cy<2>)
-     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<3> (Maddsub_sum_cy<3>)
-     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<4> (Maddsub_sum_cy<4>)
-     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<5> (Maddsub_sum_cy<5>)
-     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<6> (Maddsub_sum_cy<6>)
-     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<7> (Maddsub_sum_cy<7>)
-     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<8> (Maddsub_sum_cy<8>)
-     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<9> (Maddsub_sum_cy<9>)
-     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<10> (Maddsub_sum_cy<10>)
-     XORCY:CI->O           2   0.206   1.002  Maddsub_sum_xor<11> (out<11>)
-     end scope: 'alu/alu/adder:out<11>'
-     LUT4:I0->O            1   0.254   0.790  Mmux_out27 (Mmux_out26)
-     LUT6:I4->O            1   0.250   0.682  Mmux_out28 (Mmux_out27)
-     LUT6:I5->O            2   0.254   0.726  Mmux_out29 (out<0>)
-     end scope: 'alu/alu:out<0>'
-     LUT5:I4->O            1   0.254   0.681  Mmux_out17 (out<0>)
-     end scope: 'alu:out<0>'
-     OBUF:I->O                 2.912          io_led_0_OBUF (io_led<0>)
+     FDR:C->Q             10   0.525   1.236  M_autostate_q_FSM_FFd1 (M_autostate_q_FSM_FFd1)
+     LUT3:I0->O            4   0.235   0.804  Mmux_M_alu_b16_SW0 (N18)
+     LUT6:I5->O           39   0.254   2.092  Mmux_M_alu_b16 (M_alu_b<0>)
+     LUT6:I0->O            2   0.254   1.156  Sh1241 (Sh124)
+     LUT6:I1->O            1   0.254   0.958  Mmux_out32 (Mmux_out31)
+     LUT6:I2->O            1   0.254   0.682  Mmux_out33 (Mmux_out32)
+     LUT6:I5->O            1   0.254   0.682  Mmux_out36 (Mmux_out35)
+     LUT4:I3->O            1   0.254   0.681  Mmux_out37 (out<11>)
+     end scope: 'alu:out<11>'
+     OBUF:I->O                 2.912          io_led_11_OBUF (io_led<11>)
     ----------------------------------------
-    Total                     11.876ns (5.587ns logic, 6.289ns route)
-                                       (47.0% logic, 53.0% route)
+    Total                     13.487ns (5.196ns logic, 8.291ns route)
+                                       (38.5% logic, 61.5% route)
 
 =========================================================================
 
@@ -803,20 +797,20 @@ Clock to Setup on destination clock clk
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-clk            |    7.377|         |         |         |
+clk            |    9.427|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 =========================================================================
 
 
-Total REAL time to Xst completion: 6.00 secs
-Total CPU time to Xst completion: 6.57 secs
+Total REAL time to Xst completion: 9.00 secs
+Total CPU time to Xst completion: 9.03 secs
  
 --> 
 
 Total memory usage is 251292 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   66 (   0 filtered)
-Number of infos    :    2 (   0 filtered)
+Number of warnings :   69 (   0 filtered)
+Number of infos    :    3 (   0 filtered)
 

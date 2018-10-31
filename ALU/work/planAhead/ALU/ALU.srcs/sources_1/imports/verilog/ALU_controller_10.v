@@ -99,11 +99,24 @@ module alu_controller_10 (
     .read_data(M_result_read_data)
   );
   
+  wire [1-1:0] M_checker_truth;
+  reg [16-1:0] M_checker_alu_input;
+  reg [6-1:0] M_checker_alufn;
+  reg [16-1:0] M_checker_a;
+  reg [16-1:0] M_checker_b;
+  checker_20 checker (
+    .alu_input(M_checker_alu_input),
+    .alufn(M_checker_alufn),
+    .a(M_checker_a),
+    .b(M_checker_b),
+    .truth(M_checker_truth)
+  );
+  
   wire [16-1:0] M_alu_out;
   reg [6-1:0] M_alu_alufn;
   reg [16-1:0] M_alu_a;
   reg [16-1:0] M_alu_b;
-  alu_unit_20 alu (
+  alu_unit_21 alu (
     .alufn(M_alu_alufn),
     .a(M_alu_a),
     .b(M_alu_b),
@@ -133,6 +146,10 @@ module alu_controller_10 (
     M_alu_alufn = 16'bxxxxxxxxxxxxxxxx;
     M_alu_a = 16'bxxxxxxxxxxxxxxxx;
     M_alu_b = 16'bxxxxxxxxxxxxxxxx;
+    M_checker_alufn = 16'bxxxxxxxxxxxxxxxx;
+    M_checker_a = 16'bxxxxxxxxxxxxxxxx;
+    M_checker_b = 16'bxxxxxxxxxxxxxxxx;
+    M_checker_alu_input = 16'bxxxxxxxxxxxxxxxx;
     out = 16'h0000;
     io_sel = 4'h0;
     io_seg = 8'hff;
@@ -339,43 +356,83 @@ module alu_controller_10 (
             end
           end
           DEMOADDERROR_autostate: begin
-            M_seg_values = 20'h20671;
+            M_alu_alufn = 6'h00;
+            M_alu_a = 16'h0002;
+            M_alu_b = 16'h0001;
+            M_result_write_data = M_alu_out + 1'h1;
+            M_result_write_en = 1'h1;
+            M_seg_values = 20'h20651;
             io_seg = M_seg_seg;
             io_sel = ~M_seg_sel;
             M_counter_d = M_counter_q + 1'h1;
-            if (M_counter_q[29+0-:1] == 1'h1) begin
+            if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data == 16'h0003) begin
               M_counter_d = 1'h0;
-              M_autostate_d = ADDERERROR_autostate;
+              M_autostate_d = BOOL1_autostate;
+            end else begin
+              if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data != 16'h0003) begin
+                M_counter_d = 1'h0;
+                M_autostate_d = ADDERERROR_autostate;
+              end
             end
           end
           DEMOBOOLERROR_autostate: begin
             M_seg_values = 20'h3a671;
             io_seg = M_seg_seg;
             io_sel = ~M_seg_sel;
+            M_alu_alufn = 6'h1a;
+            M_alu_a = 16'h0003;
+            M_alu_b = 16'h0001;
+            M_result_write_data = M_alu_out + 1'h1;
+            M_result_write_en = 1'h1;
             M_counter_d = M_counter_q + 1'h1;
-            if (M_counter_q[29+0-:1] == 1'h1) begin
+            if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data == 16'h0003) begin
               M_counter_d = 1'h0;
-              M_autostate_d = BOOLERROR_autostate;
+              M_autostate_d = COMP1_autostate;
+            end else begin
+              if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data != 16'h0003) begin
+                M_counter_d = 1'h0;
+                M_autostate_d = BOOLERROR_autostate;
+              end
             end
           end
           DEMOCOMPERROR_autostate: begin
-            M_seg_values = 20'h62632;
+            M_seg_values = 20'h62652;
             io_seg = M_seg_seg;
             io_sel = ~M_seg_sel;
+            M_alu_alufn = 6'h33;
+            M_alu_a = 16'h0002;
+            M_alu_b = 16'h0002;
+            M_result_write_data = M_alu_out + 1'h1;
+            M_result_write_en = 1'h1;
             M_counter_d = M_counter_q + 1'h1;
-            if (M_counter_q[29+0-:1] == 1'h1) begin
+            if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data == 16'h0001) begin
               M_counter_d = 1'h0;
-              M_autostate_d = COMPERROR_autostate;
+              M_autostate_d = SHIF1_autostate;
+            end else begin
+              if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data != 16'h0001) begin
+                M_counter_d = 1'h0;
+                M_autostate_d = COMPERROR_autostate;
+              end
             end
           end
           DEMOSHIFERROR_autostate: begin
-            M_seg_values = 20'h28a31;
+            M_seg_values = 20'h28a71;
             io_seg = M_seg_seg;
             io_sel = ~M_seg_sel;
+            M_alu_alufn = 6'h20;
+            M_alu_a = 16'h0003;
+            M_alu_b = 16'h0001;
+            M_result_write_data = M_alu_out;
+            M_result_write_en = 1'h1;
             M_counter_d = M_counter_q + 1'h1;
-            if (M_counter_q[29+0-:1] == 1'h1) begin
+            if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data == 16'h0006) begin
               M_counter_d = 1'h0;
-              M_autostate_d = SHIFERROR_autostate;
+              M_autostate_d = DEMOADDERROR_autostate;
+            end else begin
+              if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data != 16'h0006) begin
+                M_counter_d = 1'h0;
+                M_autostate_d = SHIFERROR_autostate;
+              end
             end
           end
         endcase

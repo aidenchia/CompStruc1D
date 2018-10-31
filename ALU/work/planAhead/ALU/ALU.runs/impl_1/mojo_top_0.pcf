@@ -1,5 +1,5 @@
 //! **************************************************************************
-// Written by: Map P.20131013 on Tue Oct 30 17:30:01 2018
+// Written by: Map P.20131013 on Wed Oct 31 09:47:08 2018
 //! **************************************************************************
 
 SCHEMATIC START;
@@ -123,24 +123,20 @@ TIMEGRP clk = BEL "alu/ram1/read_data_5" BEL "alu/ram1/read_data_4" BEL
         "alu/result/read_data_2" BEL "alu/result/read_data_1" BEL
         "alu/result/read_data_0" BEL "alu/result/ram_0_2" BEL
         "alu/result/ram_0_1" BEL "alu/result/ram_0_0" BEL
-        "alu/M_autostate_q_FSM_FFd10_1" BEL "alu/seg/ctr/M_ctr_q_17" BEL
-        "alu/seg/ctr/M_ctr_q_16" BEL "alu/seg/ctr/M_ctr_q_15" BEL
-        "alu/seg/ctr/M_ctr_q_14" BEL "alu/seg/ctr/M_ctr_q_13" BEL
-        "alu/seg/ctr/M_ctr_q_12" BEL "alu/seg/ctr/M_ctr_q_11" BEL
-        "alu/seg/ctr/M_ctr_q_10" BEL "alu/seg/ctr/M_ctr_q_9" BEL
-        "alu/seg/ctr/M_ctr_q_8" BEL "alu/seg/ctr/M_ctr_q_7" BEL
-        "alu/seg/ctr/M_ctr_q_6" BEL "alu/seg/ctr/M_ctr_q_5" BEL
-        "alu/seg/ctr/M_ctr_q_4" BEL "alu/seg/ctr/M_ctr_q_3" BEL
-        "alu/seg/ctr/M_ctr_q_2" BEL "alu/seg/ctr/M_ctr_q_1" BEL
-        "alu/seg/ctr/M_ctr_q_0" BEL "alu/M_fsm_controller_q_FSM_FFd1_1" BEL
+        "alu/seg/ctr/M_ctr_q_17" BEL "alu/seg/ctr/M_ctr_q_16" BEL
+        "alu/seg/ctr/M_ctr_q_15" BEL "alu/seg/ctr/M_ctr_q_14" BEL
+        "alu/seg/ctr/M_ctr_q_13" BEL "alu/seg/ctr/M_ctr_q_12" BEL
+        "alu/seg/ctr/M_ctr_q_11" BEL "alu/seg/ctr/M_ctr_q_10" BEL
+        "alu/seg/ctr/M_ctr_q_9" BEL "alu/seg/ctr/M_ctr_q_8" BEL
+        "alu/seg/ctr/M_ctr_q_7" BEL "alu/seg/ctr/M_ctr_q_6" BEL
+        "alu/seg/ctr/M_ctr_q_5" BEL "alu/seg/ctr/M_ctr_q_4" BEL
+        "alu/seg/ctr/M_ctr_q_3" BEL "alu/seg/ctr/M_ctr_q_2" BEL
+        "alu/seg/ctr/M_ctr_q_1" BEL "alu/seg/ctr/M_ctr_q_0" BEL
+        "alu/M_fsm_controller_q_FSM_FFd1_1" BEL
         "alu/M_fsm_controller_q_FSM_FFd1_2" BEL
         "alu/M_fsm_controller_q_FSM_FFd1_3" BEL
         "alu/M_fsm_controller_q_FSM_FFd1_4" BEL
-        "alu/M_fsm_controller_q_FSM_FFd1_5" BEL
-        "alu/M_fsm_controller_q_FSM_FFd1_6" BEL
-        "alu/M_fsm_controller_q_FSM_FFd1_7" BEL
-        "alu/M_fsm_controller_q_FSM_FFd1_8" BEL
-        "alu/M_fsm_controller_q_FSM_FFd1_9" BEL "alu/M_counter_q_0" BEL
+        "alu/M_fsm_controller_q_FSM_FFd1_5" BEL "alu/M_counter_q_0" BEL
         "alu/M_counter_q_1" BEL "alu/M_counter_q_2" BEL "alu/M_counter_q_3"
         BEL "alu/M_counter_q_4" BEL "alu/M_counter_q_5" BEL
         "alu/M_counter_q_6" BEL "alu/M_counter_q_7" BEL "alu/M_counter_q_8"
@@ -151,16 +147,16 @@ TIMEGRP clk = BEL "alu/ram1/read_data_5" BEL "alu/ram1/read_data_4" BEL
         "alu/M_autostate_q_FSM_FFd4" BEL "alu/M_autostate_q_FSM_FFd5" BEL
         "alu/M_autostate_q_FSM_FFd6" BEL "alu/M_autostate_q_FSM_FFd7" BEL
         "alu/M_autostate_q_FSM_FFd8" BEL "alu/M_autostate_q_FSM_FFd9" BEL
-        "alu/M_autostate_q_FSM_FFd7_1" BEL "alu/M_counter_q_10" BEL
-        "alu/M_counter_q_11" BEL "alu/M_counter_q_12" BEL "alu/M_counter_q_13"
-        BEL "alu/M_counter_q_14" BEL "alu/M_counter_q_15" BEL
-        "alu/M_counter_q_20" BEL "alu/M_counter_q_16" BEL "alu/M_counter_q_21"
-        BEL "alu/M_counter_q_17" BEL "alu/M_counter_q_22" BEL
-        "alu/M_counter_q_18" BEL "alu/M_counter_q_23" BEL "alu/M_counter_q_24"
-        BEL "alu/M_counter_q_19" BEL "alu/M_counter_q_25" BEL
-        "alu/M_counter_q_26" BEL "alu/M_counter_q_27" BEL "alu/M_counter_q_28"
-        BEL "alu/M_counter_q_29" BEL "clk_BUFGP/BUFG" BEL
-        "reset_cond/M_stage_q_3" BEL "reset_cond/M_stage_q_2" BEL
+        "alu/M_autostate_q_FSM_FFd6_1" BEL "alu/M_autostate_q_FSM_FFd7_1" BEL
+        "alu/M_counter_q_10" BEL "alu/M_counter_q_11" BEL "alu/M_counter_q_12"
+        BEL "alu/M_counter_q_13" BEL "alu/M_counter_q_14" BEL
+        "alu/M_counter_q_15" BEL "alu/M_counter_q_20" BEL "alu/M_counter_q_16"
+        BEL "alu/M_counter_q_21" BEL "alu/M_counter_q_17" BEL
+        "alu/M_counter_q_22" BEL "alu/M_counter_q_23" BEL "alu/M_counter_q_18"
+        BEL "alu/M_counter_q_19" BEL "alu/M_counter_q_24" BEL
+        "alu/M_counter_q_25" BEL "alu/M_counter_q_26" BEL "alu/M_counter_q_27"
+        BEL "alu/M_counter_q_28" BEL "alu/M_counter_q_29" BEL "clk_BUFGP/BUFG"
+        BEL "reset_cond/M_stage_q_3" BEL "reset_cond/M_stage_q_2" BEL
         "reset_cond/M_stage_q_1" BEL "reset_cond/M_stage_q_0" BEL
         "start_edge/M_last_q" BEL "toggle_edge/M_last_q" BEL
         "next_edge/M_last_q" BEL "toggle_button/M_ctr_q_0" BEL
