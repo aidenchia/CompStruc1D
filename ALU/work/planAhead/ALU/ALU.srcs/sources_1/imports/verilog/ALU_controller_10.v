@@ -427,7 +427,7 @@ module alu_controller_10 (
             M_counter_d = M_counter_q + 1'h1;
             if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data == 16'h0006) begin
               M_counter_d = 1'h0;
-              M_autostate_d = DEMOADDERROR_autostate;
+              M_autostate_d = ADDER1_autostate;
             end else begin
               if (M_counter_q[29+0-:1] == 1'h1 && M_result_read_data != 16'h0006) begin
                 M_counter_d = 1'h0;

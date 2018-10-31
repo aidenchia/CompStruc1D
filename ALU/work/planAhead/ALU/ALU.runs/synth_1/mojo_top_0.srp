@@ -561,7 +561,7 @@ Building and optimizing final netlist ...
 Found area constraint ratio of 100 (+ 0) on block mojo_top_0, actual ratio is 10.
 FlipFlop alu/M_autostate_q_FSM_FFd6 has been replicated 1 time(s)
 FlipFlop alu/M_autostate_q_FSM_FFd7 has been replicated 1 time(s)
-FlipFlop alu/M_fsm_controller_q_FSM_FFd1 has been replicated 5 time(s)
+FlipFlop alu/M_fsm_controller_q_FSM_FFd1 has been replicated 4 time(s)
 FlipFlop alu/ram1/read_data_0 has been replicated 1 time(s)
 
 Final Macro Processing ...
@@ -577,8 +577,8 @@ Unit <mojo_top_0> processed.
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 221
- Flip-Flops                                            : 221
+# Registers                                            : 220
+ Flip-Flops                                            : 220
 # Shift Registers                                      : 3
  2-bit shift register                                  : 3
 
@@ -603,24 +603,24 @@ Top Level Output File Name         : mojo_top_0.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 772
+# BELS                             : 784
 #      GND                         : 11
 #      INV                         : 9
 #      LUT1                        : 103
-#      LUT2                        : 40
-#      LUT3                        : 18
-#      LUT4                        : 56
-#      LUT5                        : 31
-#      LUT6                        : 235
+#      LUT2                        : 43
+#      LUT3                        : 17
+#      LUT4                        : 55
+#      LUT5                        : 35
+#      LUT6                        : 236
 #      MUXCY                       : 120
-#      MUXF7                       : 11
+#      MUXF7                       : 17
 #      MUXF8                       : 1
 #      VCC                         : 10
 #      XORCY                       : 127
-# FlipFlops/Latches                : 224
+# FlipFlops/Latches                : 223
 #      FD                          : 45
 #      FDE                         : 44
-#      FDR                         : 40
+#      FDR                         : 39
 #      FDRE                        : 90
 #      FDS                         : 5
 # Shift Registers                  : 3
@@ -639,17 +639,17 @@ Selected Device : 6slx9tqg144-2
 
 
 Slice Logic Utilization: 
- Number of Slice Registers:             224  out of  11440     1%  
- Number of Slice LUTs:                  495  out of   5720     8%  
-    Number used as Logic:               492  out of   5720     8%  
+ Number of Slice Registers:             223  out of  11440     1%  
+ Number of Slice LUTs:                  501  out of   5720     8%  
+    Number used as Logic:               498  out of   5720     8%  
     Number used as Memory:                3  out of   1440     0%  
        Number used as SRL:                3
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:    600
-   Number with an unused Flip Flop:     376  out of    600    62%  
-   Number with an unused LUT:           105  out of    600    17%  
-   Number of fully used LUT-FF pairs:   119  out of    600    19%  
+ Number of LUT Flip Flop pairs used:    607
+   Number with an unused Flip Flop:     384  out of    607    63%  
+   Number with an unused LUT:           106  out of    607    17%  
+   Number of fully used LUT-FF pairs:   117  out of    607    19%  
    Number of unique control sets:        21
 
 IO Utilization: 
@@ -680,7 +680,7 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-clk                                | BUFGP                  | 227   |
+clk                                | BUFGP                  | 226   |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -691,7 +691,7 @@ Timing Summary:
 ---------------
 Speed Grade: -2
 
-   Minimum period: 9.427ns (Maximum Frequency: 106.075MHz)
+   Minimum period: 9.400ns (Maximum Frequency: 106.389MHz)
    Minimum input arrival time before clock: 3.526ns
    Maximum output required time after clock: 13.487ns
    Maximum combinational path delay: No path found
@@ -702,33 +702,40 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
-  Clock period: 9.427ns (frequency: 106.075MHz)
-  Total number of paths / destination ports: 14316 / 447
+  Clock period: 9.400ns (frequency: 106.389MHz)
+  Total number of paths / destination ports: 14674 / 445
 -------------------------------------------------------------------------
-Delay:               9.427ns (Levels of Logic = 16)
-  Source:            alu/M_fsm_controller_q_FSM_FFd1_1 (FF)
+Delay:               9.400ns (Levels of Logic = 23)
+  Source:            alu/M_autostate_q_FSM_FFd13 (FF)
   Destination:       alu/result/ram_0_2 (FF)
   Source Clock:      clk rising
   Destination Clock: clk rising
 
-  Data Path: alu/M_fsm_controller_q_FSM_FFd1_1 to alu/result/ram_0_2
+  Data Path: alu/M_autostate_q_FSM_FFd13 to alu/result/ram_0_2
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDR:C->Q              9   0.525   0.976  M_fsm_controller_q_FSM_FFd1_1 (M_fsm_controller_q_FSM_FFd1_1)
-     LUT2:I1->O           14   0.254   1.582  Mmux_M_alu_a51 (M_alu_a<11>)
-     begin scope: 'alu/alu:a<11>'
-     begin scope: 'alu/alu/boolean:a<11>'
-     LUT6:I0->O            1   0.254   0.000  a[15]_reduce_nor_7_o1_F (N69)
-     MUXF7:I0->O           1   0.163   0.682  a[15]_reduce_nor_7_o1 (a[15]_reduce_nor_7_o1)
-     LUT6:I5->O            1   0.254   0.682  a[15]_reduce_nor_7_o2 (a[15]_reduce_nor_7_o2)
-     LUT6:I5->O            1   0.254   0.682  a[15]_reduce_nor_7_o6 (a[15]_reduce_nor_7_o)
-     LUT6:I5->O            1   0.254   0.000  Mmux_out_4 (Mmux_out_4)
-     MUXF7:I1->O           1   0.175   0.000  Mmux_out_3_f7 (Mmux_out_3_f7)
-     MUXF8:I1->O           2   0.152   0.834  Mmux_out_2_f8 (out<0>)
-     end scope: 'alu/alu/boolean:out<0>'
-     end scope: 'alu/alu:M_boolean_out<0>'
-     LUT6:I4->O            1   0.250   0.000  Madd_M_alu_out[15]_GND_6_o_add_101_OUT_lut<0> (Madd_M_alu_out[15]_GND_6_o_add_101_OUT_lut<0>)
+     FDS:C->Q             19   0.525   1.261  M_autostate_q_FSM_FFd13 (M_autostate_q_FSM_FFd13)
+     LUT2:I1->O            1   0.254   0.682  Mmux_M_alu_a15_SW0 (N14)
+     LUT6:I5->O           13   0.254   1.097  Mmux_M_alu_a15 (M_alu_a<1>)
+     begin scope: 'alu/alu:a<1>'
+     begin scope: 'alu/alu/adder:a<1>'
+     MUXCY:DI->O           1   0.181   0.000  Maddsub_sum_cy<1> (Maddsub_sum_cy<1>)
+     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<2> (Maddsub_sum_cy<2>)
+     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<3> (Maddsub_sum_cy<3>)
+     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<4> (Maddsub_sum_cy<4>)
+     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<5> (Maddsub_sum_cy<5>)
+     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<6> (Maddsub_sum_cy<6>)
+     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<7> (Maddsub_sum_cy<7>)
+     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<8> (Maddsub_sum_cy<8>)
+     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<9> (Maddsub_sum_cy<9>)
+     MUXCY:CI->O           1   0.023   0.000  Maddsub_sum_cy<10> (Maddsub_sum_cy<10>)
+     XORCY:CI->O           2   0.206   1.002  Maddsub_sum_xor<11> (out<11>)
+     end scope: 'alu/alu/adder:out<11>'
+     LUT4:I0->O            1   0.254   0.790  Mmux_out27 (Mmux_out26)
+     LUT6:I4->O            2   0.250   0.726  Mmux_out28 (Mmux_out27)
+     end scope: 'alu/alu:Mmux_out27'
+     LUT6:I5->O            1   0.254   0.000  Madd_M_alu_out[15]_GND_6_o_add_101_OUT_lut<0> (Madd_M_alu_out[15]_GND_6_o_add_101_OUT_lut<0>)
      MUXCY:S->O            1   0.215   0.000  Madd_M_alu_out[15]_GND_6_o_add_101_OUT_cy<0> (Madd_M_alu_out[15]_GND_6_o_add_101_OUT_cy<0>)
      MUXCY:CI->O           0   0.023   0.000  Madd_M_alu_out[15]_GND_6_o_add_101_OUT_cy<1> (Madd_M_alu_out[15]_GND_6_o_add_101_OUT_cy<1>)
      XORCY:CI->O           1   0.206   0.682  Madd_M_alu_out[15]_GND_6_o_add_101_OUT_xor<2> (M_alu_out[15]_GND_6_o_add_101_OUT<2>)
@@ -736,8 +743,8 @@ Delay:               9.427ns (Levels of Logic = 16)
      begin scope: 'alu/result:write_data<2>'
      FDE:D                     0.074          ram_0_2
     ----------------------------------------
-    Total                      9.427ns (3.307ns logic, 6.120ns route)
-                                       (35.1% logic, 64.9% route)
+    Total                      9.400ns (3.160ns logic, 6.240ns route)
+                                       (33.6% logic, 66.4% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
@@ -762,7 +769,7 @@ Offset:              3.526ns (Levels of Logic = 3)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
-  Total number of paths / destination ports: 7246 / 27
+  Total number of paths / destination ports: 7443 / 27
 -------------------------------------------------------------------------
 Offset:              13.487ns (Levels of Logic = 9)
   Source:            alu/M_autostate_q_FSM_FFd1 (FF)
@@ -774,7 +781,7 @@ Offset:              13.487ns (Levels of Logic = 9)
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      FDR:C->Q             10   0.525   1.236  M_autostate_q_FSM_FFd1 (M_autostate_q_FSM_FFd1)
-     LUT3:I0->O            4   0.235   0.804  Mmux_M_alu_b16_SW0 (N18)
+     LUT3:I0->O            4   0.235   0.804  Mmux_M_alu_b16_SW0 (N20)
      LUT6:I5->O           39   0.254   2.092  Mmux_M_alu_b16 (M_alu_b<0>)
      LUT6:I0->O            2   0.254   1.156  Sh1241 (Sh124)
      LUT6:I1->O            1   0.254   0.958  Mmux_out32 (Mmux_out31)
@@ -797,14 +804,14 @@ Clock to Setup on destination clock clk
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-clk            |    9.427|         |         |         |
+clk            |    9.400|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 =========================================================================
 
 
-Total REAL time to Xst completion: 9.00 secs
-Total CPU time to Xst completion: 9.03 secs
+Total REAL time to Xst completion: 10.00 secs
+Total CPU time to Xst completion: 9.45 secs
  
 --> 
 

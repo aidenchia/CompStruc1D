@@ -392,7 +392,7 @@ module alu_controller (
             
                 if(counter.q[X]==1&&result.read_data==16b110){ // means its correct!
                   counter.d =0;
-                  autostate.d = autostate.DEMOADDERROR; // if they are all working, let's go through the error states for demonstration purpose
+                  autostate.d = autostate.ADDER1; // if they are all working, let's go through the error states for demonstration purpose
                 }
                 
                 else if(counter.q[X]==1&&result.read_data!=16b110){ // checking mechanism

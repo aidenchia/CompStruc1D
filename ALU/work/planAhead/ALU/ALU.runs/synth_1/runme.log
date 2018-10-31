@@ -515,7 +515,7 @@ Building and optimizing final netlist ...
 Found area constraint ratio of 100 (+ 0) on block mojo_top_0, actual ratio is 10.
 FlipFlop alu/M_autostate_q_FSM_FFd6 has been replicated 1 time(s)
 FlipFlop alu/M_autostate_q_FSM_FFd7 has been replicated 1 time(s)
-FlipFlop alu/M_fsm_controller_q_FSM_FFd1 has been replicated 5 time(s)
+FlipFlop alu/M_fsm_controller_q_FSM_FFd1 has been replicated 4 time(s)
 FlipFlop alu/ram1/read_data_0 has been replicated 1 time(s)
 
 Final Macro Processing ...
@@ -531,8 +531,8 @@ Unit <mojo_top_0> processed.
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 221
- Flip-Flops                                            : 221
+# Registers                                            : 220
+ Flip-Flops                                            : 220
 # Shift Registers                                      : 3
  2-bit shift register                                  : 3
 
@@ -558,7 +558,7 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-clk                                | BUFGP                  | 227   |
+clk                                | BUFGP                  | 226   |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -569,7 +569,7 @@ Timing Summary:
 ---------------
 Speed Grade: -2
 
-   Minimum period: 9.427ns (Maximum Frequency: 106.075MHz)
+   Minimum period: 9.400ns (Maximum Frequency: 106.389MHz)
    Minimum input arrival time before clock: 3.526ns
    Maximum output required time after clock: 13.487ns
    Maximum combinational path delay: No path found
